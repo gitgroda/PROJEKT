@@ -1,0 +1,10 @@
+# Byggda binärer och mellanfiler (både Debug och Release)
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / Rider användarspecifika filer och cache
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+.idea/
