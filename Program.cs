@@ -1,2 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("DO NOT REDEEM IT");
+﻿
+Grid grid = new Grid(110, 40);
+
+grid.Print();

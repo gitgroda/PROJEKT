@@ -1,0 +1,57 @@
+using System.Security.Cryptography.X509Certificates;
+
+public class Grid
+{
+    public char[,] tiles;
+    public int Width { get; }
+    public int Height { get; }
+
+    public Grid(int width, int height) 
+    {
+        this.Width = width;
+        this.Height = height;
+        this.tiles = new char[Width, Height]; //2d array tar [X-kordinat, Y-kordnat]
+
+        for (int y = 0; y < Height; y++)
+        { 
+            for (int x = 0; x < Width; x++)
+            {
+                if (y == 0 || y == Height - 1 || x == 0 || x == Width - 1) //skriver ut border
+                {
+                    tiles[x, y] = 'x';
+                }
+                else
+                {
+                    tiles[x, y] = '-'; 
+                }
+            }   
+        }
+    }
+    public void Print()
+    {
+        System.Console.WriteLine();
+        for (int y = 0; y < Height; y++)
+        { 
+            for (int x = 0; x < Width; x++)
+            {
+                System.Console.Write(tiles[x, y]);
+            } 
+            System.Console.WriteLine();  
+        }
+        System.Console.WriteLine();
+    }
+
+    public char GetTile(int x, int y)
+    {
+        if (x < 0 || x >= Width || y < 0 || y >= Height)
+        {
+            return 'x';
+        }
+        else
+        {
+            return tiles[x, y]; 
+
+        }
+    }
+
+}
