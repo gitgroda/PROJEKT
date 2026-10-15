@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\alfre\\OneDrive - Uppsala universitet\\SKOLA\\OOP 2\\PROJEKT\\DonkeyKong.csproj": {}
+    "C:\\Users\\Admin\\Desktop\\UU\\OOP2\\Projekt\\PROJEKT\\DonkeyKong.csproj": {}
   },
   "projects": {
-    "c:\\Users\\alfre\\OneDrive - Uppsala universitet\\SKOLA\\OOP 2\\PROJEKT\\DonkeyKong.csproj": {
+    "C:\\Users\\Admin\\Desktop\\UU\\OOP2\\Projekt\\PROJEKT\\DonkeyKong.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\alfre\\OneDrive - Uppsala universitet\\SKOLA\\OOP 2\\PROJEKT\\DonkeyKong.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Desktop\\UU\\OOP2\\Projekt\\PROJEKT\\DonkeyKong.csproj",
         "projectName": "DonkeyKong",
-        "projectPath": "c:\\Users\\alfre\\OneDrive - Uppsala universitet\\SKOLA\\OOP 2\\PROJEKT\\DonkeyKong.csproj",
-        "packagesPath": "C:\\Users\\alfre\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\alfre\\OneDrive - Uppsala universitet\\SKOLA\\OOP 2\\PROJEKT\\obj\\",
+        "projectPath": "C:\\Users\\Admin\\Desktop\\UU\\OOP2\\Projekt\\PROJEKT\\DonkeyKong.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Admin\\Desktop\\UU\\OOP2\\Projekt\\PROJEKT\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\alfre\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
