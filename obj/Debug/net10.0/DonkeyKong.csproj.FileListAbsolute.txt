@@ -1,0 +1,15 @@
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\bin\Debug\net10.0\DonkeyKong.exe
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\bin\Debug\net10.0\DonkeyKong.deps.json
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\bin\Debug\net10.0\DonkeyKong.runtimeconfig.json
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\bin\Debug\net10.0\DonkeyKong.dll
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\bin\Debug\net10.0\DonkeyKong.pdb
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.AssemblyInfoInputs.cache
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.AssemblyInfo.cs
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.csproj.CoreCompileInputs.cache
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.sourcelink.json
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.dll
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\refint\DonkeyKong.dll
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.pdb
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\DonkeyKong.genruntimeconfig.cache
+C:\Users\alfre\OneDrive - Uppsala universitet\SKOLA\OOP 2\PROJEKT\obj\Debug\net10.0\ref\DonkeyKong.dll
