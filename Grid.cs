@@ -42,15 +42,15 @@ public class Grid
         System.Console.WriteLine();
     }
 
-    public char GetTile(int x, int y)
+    public char GetTile(Position positon)
     {
-        if (x < 0 || x >= Width || y < 0 || y >= Height)
+        if (positon.X < 0 || positon.X >= Width || positon.Y < 0 || positon.Y >= Height)
         {
             return 'x';
         }
         else
         {
-            return tiles[x, y]; 
+            return tiles[positon.X, positon.Y]; 
         }
     }
 

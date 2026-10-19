@@ -1,10 +1,18 @@
-﻿
-Grid grid = new Grid(80, 25);
+﻿Console.Clear();
+
+Map map = new Map(90, 30);
 Renderer render = new Renderer();
+Climber climber = new Climber(new Position(5, map.Height - 2));
 
-Console.SetWindowSize(80, 25);
+Game game = new Game(map, climber, render);
 
-Climber climber = new Climber(new Position(5, grid.Height - 3));
-Console.Clear();
+game.Run();
 
-render.Draw(grid, climber);
+
+
+
+
+
+
+
+

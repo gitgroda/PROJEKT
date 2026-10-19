@@ -7,7 +7,6 @@ public class Position
     {
         this.X = X;
         this.Y = Y;
-        
     }
     
 }
