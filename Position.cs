@@ -1,6 +1,13 @@
 public class Position
 {
-    public int x { get; }
-    public int y { get; }
+    public int X { get; }
+    public int Y { get; }
+    
+    public Position(int X, int Y)
+    {
+        this.X = X;
+        this.Y = Y;
+        
+    }
     
 }
