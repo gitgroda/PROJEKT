@@ -28,6 +28,6 @@ public class Map
     public bool IsLadder()
     {
         if (Position)
-    }poop
+    }
 
 }
