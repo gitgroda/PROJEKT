@@ -9,9 +9,9 @@ public class Renderer
             for (int x = 0; x < map.Width; x++)
             {
                 // if pos == player.pos, draw player
-                if (x == climber.position.X && y == climber.position.Y)
+                if (x == climber.Position.X && y == climber.Position.Y)
                 {
-                    Console.Write(climber.symbol);
+                    Console.Write(climber.Symbol);
                 }
                 else
                 {
