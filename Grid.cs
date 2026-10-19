@@ -3,7 +3,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public class Grid
 {
-    public char[,] tiles;
+    private char[,] tiles;
     public int Width { get; }
     public int Height { get; }
 
@@ -12,34 +12,21 @@ public class Grid
         this.Width = width;
         this.Height = height;
         this.tiles = new char[Width, Height]; //2d array tar [X-kordinat, Y-kordnat]
+        for (int y = 0; y < Height; y++)
+        { 
+            for (int x = 0; x < Width; x++)
+            {
+                tiles[x, y] = ' '; 
+            }   
+        }
 
-        for (int y = 0; y < Height; y++)
-        { 
-            for (int x = 0; x < Width; x++)
-            {
-                if (y == 0 || y == Height - 1 || x == 0 || x == Width - 1) //skriver ut border
-                {
-                    tiles[x, y] = 'x';
-                }
-                else
-                {
-                    tiles[x, y] = '-'; 
-                }
-            }   
-        }
     }
-    public void Print()
+public void SetTile(int x, int y, char tile)
     {
-        System.Console.WriteLine();
-        for (int y = 0; y < Height; y++)
-        { 
-            for (int x = 0; x < Width; x++)
-            {
-                System.Console.Write(tiles[x, y]);
-            }   
-            System.Console.WriteLine();  
+        if (x >= 0 && x < Width && y >= 0 && y < Height)
+        {
+            tiles[x, y] = tile;
         }
-        System.Console.WriteLine();
     }
 
     public char GetTile(Position positon)
