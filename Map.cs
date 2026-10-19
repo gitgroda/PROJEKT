@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 
 public class Map
@@ -23,11 +24,25 @@ public class Map
         if (position.X < 0 || position.X >= Width || position.Y < 0 || position.Y >= Height) return false;
     
         else if (grid.GetTile(position) == 'x') return false;
+        return true;
        
     }
-    public bool IsLadder()
+    public bool IsLadder(Position position)
     {
-        if (Position)
+        if (OutOfBounds(position)) return false;
+
+        return grid.GetTile(position) == 'H';   //uppdatera till symbol för stege
+    }
+    public bool HasGroundBelow(Position position)
+    {
+        int belowY = position.Y + 1;
+
+        if (OutOfBounds(position)) return false;
+
+        if(belowY >= grid.Height) return true; //om spelare står på golvets border
+
+        return grid.GetTile(position) == 'X'; //uppdatera till symbol för golv / plattform
+        
     }
 
 }
