@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Security;
 
-public class Game (Map map, Climber climber, Renderer render)
+public class Game (Map map, Climber climber, IRenderer render)
 {
     private bool isRunning;
     public void Run()
@@ -10,7 +10,7 @@ public class Game (Map map, Climber climber, Renderer render)
         while (isRunning)
         {
             HandleInput();
-            render.Draw();
+            render.Draw(map, climber);
             Thread.Sleep(33);
         }
     }
