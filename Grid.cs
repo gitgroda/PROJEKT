@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System.Security.Cryptography.X509Certificates;
 
 public class Grid
@@ -35,7 +36,7 @@ public class Grid
             for (int x = 0; x < Width; x++)
             {
                 System.Console.Write(tiles[x, y]);
-            } 
+            }   
             System.Console.WriteLine();  
         }
         System.Console.WriteLine();
@@ -50,7 +51,6 @@ public class Grid
         else
         {
             return tiles[x, y]; 
-
         }
     }
 
