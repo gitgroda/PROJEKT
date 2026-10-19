@@ -1,12 +1,13 @@
 public class Climber
 {
-    public char symbol {get; } = '@';
-    public Position position;
+    public Health HP {get; set;}
+    public char Symbol {get; } = '@';
+    public Position Position;
 
-    public Climber(Position position)
+    public Climber(Position position, Health hp)
     {
-       this.position = position;
-        
+       Position = position;
+       HP = hp;
     }
 
 

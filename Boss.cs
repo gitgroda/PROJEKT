@@ -1,10 +1,9 @@
 public class Boss
 {
-    private Position position {get; }
-    private char symbol;
-    public Boss(Position position, char symbol)
+    private Position Position {get; }
+    private char Symbol = 'D';
+    public Boss(Position position)
     {
-        this.symbol = symbol;
-        this.position = position;
+        Position = position;
     }
 }

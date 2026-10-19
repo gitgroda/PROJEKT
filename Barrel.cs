@@ -1,18 +1,16 @@
-using System.Formats.Tar;
-
 public class Barrel : IThreat
 {
-    private Position position;
-    private char symbol;
-    private int damage;
-    public Barrel(Position position)
+    public Position Position;
+    public IBarrelType Type;
+    public char Symbol {get;}
+    public Barrel(Position position, IBarrelType type)
     {
-        this.position = position;
-    }
-
-    public Position GetPos()
+        Position = position;
+        Type = type;
+        Symbol = type.Symbol;
+    } 
+        public Position GetPos()
     {
-        return position;
+        return Position;
     }
-
 }
