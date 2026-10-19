@@ -9,6 +9,9 @@ public class Climber
        Position = position;
        HP = hp;
     }
+    public void MoveTo(int targetX, int targetY) 
+    {
+        Position = new Position(targetX, targetY);
 
-
+    }
 }

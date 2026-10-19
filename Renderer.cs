@@ -1,6 +1,6 @@
-public class Renderer
+public class Renderer(Map map, Climber climber)
 {
-    public void Draw(Map map, Climber climber)
+    public void Draw()
     {
         Console.SetCursorPosition(0, 0);
 
@@ -22,4 +22,5 @@ public class Renderer
             Console.WriteLine();
         }
     }
+    
 }
