@@ -1,3 +1,4 @@
+using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
 
@@ -10,47 +11,49 @@ public class Map
     {
         grid = new Grid(width, height);
     }
-    
     public int Width => grid.Width;
     public int Height => grid.Height;
-    public char GetTile(Position positon) => grid.GetTile(positon);
-    public void SetTile(Position position, char tile) => grid.SetTile(position, tile);
-    public bool OutOfBounds(Position position)
+    public IGameObject GetEntityAt(Position pos)
     {
-        if (position.X < 0 || position.X >= Width || position.Y < 0 || position.Y >= Height) return true;
-        else return false;
+        if(entities.TryGetValue(pos, out var gameObject))
+        {
+            return gameObject;
+        } 
+        return null;
     }
-    public bool IsWalkable(Position position)
+    public void Place(Position pos, IGameObject obj) =>  entities[pos] = obj;
+    public void Remove(Position pos) => entities.Remove(pos);
+  
+    public void TryMoveEntity(Position from, Position to)
     {
-        if (OutOfBounds(position))
+        if(entities.TryGetValue(from, out var obj))
         {
-            return false;
-        } 
-        if (position.X < 0 || position.X >= Width || position.Y < 0 || position.Y >= Height)
-        {
-            return false;
-        } 
-        else if (grid.GetTile(position) == 'x')
-        {
-             return false;
+            if(GetEntityAt(to) != null && entities[from] != null)
+            {
+
+            }
+            entities[to] = obj;
         }
-        return true;
-       
-    }
-    public bool IsLadder(Position position)
+    }    
+
+
+
+
+
+    public char GetTile(Position pos) => grid.GetTile(pos);
+    public void SetTile(Position pos, char tile) => grid.SetTile(pos, tile);
+    public bool OutOfBounds(Position pos) => pos.X < 0 || pos.X >= Width || pos.Y < 0 || pos.Y >= Height;
+    public bool IsWalkable(Position pos) => !OutOfBounds(pos) && (grid.GetTile(pos) == 'x');
+    public bool IsLadder(Position pos)
     {
-        if (OutOfBounds(position)) return false;
+        if (OutOfBounds(pos)) return false;
 
-        return grid.GetTile(position) == 'H' || grid.GetTile(new Position(position.X, position.Y + 1)) == 'H';   //uppdatera till symbol för stege
+        return grid.GetTile(pos) == 'H' || grid.GetTile(new Position(pos.X, pos.Y + 1)) == 'H'; //uppdatera till symbol för stege
     }
-    public bool HasGroundBelow(Position position)
+    public bool HasGroundBelow(Position pos)
     {
-        if (OutOfBounds(position)) return false;
+        if (OutOfBounds(pos)) return false;
 
-        return grid.GetTile(position) == 'x' || grid.GetTile(position) == 'H' ; //uppdatera till symbol för golv / plattform
-        
+        return grid.GetTile(pos) == 'x' || grid.GetTile(pos) == 'H' ; //uppdatera till symbol för golv / plattform
     }
-   
-    
-
 }
