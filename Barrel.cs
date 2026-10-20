@@ -1,4 +1,4 @@
-public class Barrel : IThreat
+public class Barrel : IGameObject
 {
     public Position Position;
     public IBarrelType Type;
