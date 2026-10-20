@@ -1,4 +1,4 @@
-public class Position
+public readonly record struct Position
 {
     public int X { get; }
     public int Y { get; }

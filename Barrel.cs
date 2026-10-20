@@ -1,13 +1,13 @@
 public class Barrel : IGameObject
 {
     
-    public char Symbol {get;}
+    public char Symbol { get; }
     public Barrel()
     {
 
     } 
-        public Position GetPos()
+    public void OnCollide(Climber climber)
     {
-        return Position;
+        
     }
 }

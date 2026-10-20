@@ -1,4 +1,4 @@
-public class Climber
+public class Climber : IGameObject
 {
     public Health HP {get; set;}
     public char Symbol {get; } = '@';
@@ -13,5 +13,9 @@ public class Climber
     {
         Position = new Position(targetX, targetY);
 
+    }
+    public void OnCollide()
+    {
+        
     }
 }

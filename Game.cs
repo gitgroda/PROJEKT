@@ -41,9 +41,7 @@ public class Game (Map map, Climber climber, IRenderer render)
     }
     public void TryMove(int deltaX) //deltaX = +1 eller -1, deltaY = 0 då vi endast vill gå åt sidan
     {
-        Position newPos = new Position(climber.Position.X + deltaX, climber.Position.Y);
-        Position newPosBelow = new Position(climber.Position.X + deltaX, climber.Position.Y + 1);
-
+    
         if(map.IsWalkable(newPos) && map.HasGroundBelow(newPosBelow))
         {
             climber.MoveTo(climber.Position.X + deltaX, climber.Position.Y);
@@ -58,5 +56,19 @@ public class Game (Map map, Climber climber, IRenderer render)
             climber.MoveTo(climber.Position.X, climber.Position.Y + deltaY);
         }
     }
+    public void HandleCollision(IGameObject a, IGameObject b)   //Om vi kommer hit vet vi att en climber kolliderat med barrel. KOllar sedan vilken som är vilken och dela ut skada
+    {
+        if(a is Climber c && b is Barrel bar)
+        {
+             bar.OnCollide(c);
+        }
+        else if(a is Barrel _bar && b is Climber _c)
+        {
+             _bar.OnCollide(_c);
+        }
+        
+    }
+   
+
 
 }

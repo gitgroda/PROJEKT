@@ -1,4 +1,5 @@
-public class IGameObject
+public interface IGameObject
 {
-	public char symbol { get; }
+	char Symbol { get; }
+    void OnCollide();
 }
