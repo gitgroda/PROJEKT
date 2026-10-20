@@ -1,4 +1,4 @@
-public interface ICollissionBehavior
+public interface ICollisionBehavior
 {
-    void Collide();
+    void Collide(Climber climber);
 }

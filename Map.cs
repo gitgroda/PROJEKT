@@ -4,7 +4,7 @@ using System.Security.Principal;
 public class Map
 {
     public Grid grid { get; }
-    public Dictionary<Position, IGameObject>
+    public Dictionary<Position, IGameObject> entities = new();
 
     public Map(int width, int height)
     {
