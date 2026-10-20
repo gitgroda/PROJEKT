@@ -1,4 +1,4 @@
 public interface IMoveBehavior
 {
-void Move();
+void Move(IGameObject gameObject, Map map);
 }
