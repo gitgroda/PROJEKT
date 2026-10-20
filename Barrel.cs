@@ -1,13 +1,16 @@
 public class Barrel : IGameObject
 {
-    
-    public char Symbol { get; }
-    public Barrel()
+    public int direction {get; set;} //1 = höger -1 = vänster
+    public char Symbol {get;}
+    public IMoveBehavior MoveBehavior;
+    public ICollisionBehavior CollisionBehavior;
+    public Barrel(char symbol, IMoveBehavior moveBehavior)
     {
-
-    } 
-    public void OnCollide(Climber climber)
+        Symbol = symbol;
+        MoveBehavior = moveBehavior;
+    }
+    public void onCollide(Climber climber)
     {
-        
+        CollisionBehavior.Collide(climber);
     }
 }
