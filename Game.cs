@@ -97,6 +97,9 @@ public class Game (Map map, Climber climber, IRenderer render)
         {
             obj.onCollide(climber);
         }
+        obj.onCollide(climber);
+        gameObjects.Remove(obj);
+
     }
     private void UpdatePhysics()
     {

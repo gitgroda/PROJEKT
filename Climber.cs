@@ -22,6 +22,7 @@ public class Climber
     {
         isJumping = true;
         JumpTicksLeft = ticks;
+        Position = new Position(targetX, targetY);
     }
     public void DuringJump()
     {
@@ -39,4 +40,5 @@ public class Climber
 
     public void ApplyPoison() => poisonStatus.Apply();
     public void UpdatePoison() => poisonStatus.Update(this.HP);
+    public void ApplyHeal() => this.HP.HP =+ 1;
 }

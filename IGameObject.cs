@@ -4,5 +4,6 @@ public interface IGameObject
 	Position Position { get; set; }
 	void Update(Map map);
 	void onCollide(Climber climber);
+	ConsoleColor Color { get; }
 }
 	
