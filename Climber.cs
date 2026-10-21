@@ -22,7 +22,6 @@ public class Climber
     {
         isJumping = true;
         JumpTicksLeft = ticks;
-        Position = new Position(targetX, targetY);
     }
     public void DuringJump()
     {
