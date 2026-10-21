@@ -15,12 +15,13 @@ public class Game (Map map, Climber climber, IRenderer render)
         while (isRunning)
         {
             HandleInput();
+
             foreach (var obj in gameObjects)
             {
-            
                 obj.Update(map);
-                HandleCollision(obj);
+                if (HandleCollision(obj)) continue; 
             }
+            
             climber.UpdatePoison();
             UpdatePhysics();
             render.Draw(map, climber, gameObjects);
@@ -42,16 +43,16 @@ public class Game (Map map, Climber climber, IRenderer render)
         switch (key)
         {
             case ConsoleKey.LeftArrow or ConsoleKey.A:
-                TryMove(-2);
+                TryMove(-1);
                 break;
             case ConsoleKey.RightArrow or ConsoleKey.D:
-                TryMove(2);
+                TryMove(1);
                 break;
             case ConsoleKey.UpArrow or ConsoleKey.W:
-                TryClimb(-2);
+                TryClimb(-1);
                 break;
             case ConsoleKey.DownArrow or ConsoleKey.S:
-                TryClimb(2);
+                TryClimb(1);
                 break;
             case ConsoleKey.Spacebar or ConsoleKey.F:
                 TryJump();
@@ -91,15 +92,15 @@ public class Game (Map map, Climber climber, IRenderer render)
         }
     }
 //Ny metod som enbart mäter om ett objekt krockar med spelaren. Tänker att vi inte har planer på att implementera krockar mellan andra objekt? 
-    private void HandleCollision(IGameObject obj)
+    private bool HandleCollision(IGameObject obj)
     {
         if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
         {
             obj.onCollide(climber);
+            gameObjects.Remove(obj);
+            return true;
         }
-        obj.onCollide(climber);
-        gameObjects.Remove(obj);
-
+        return false;
     }
     private void UpdatePhysics()
     {
@@ -112,7 +113,6 @@ public class Game (Map map, Climber climber, IRenderer render)
             climber.CancelJump();
             return;
         }
-
         if (climber.isJumping)
         {
             if (map.IsWalkable(GetAbovePos()) && !map.IsLadder(GetAbovePos()))
@@ -125,7 +125,6 @@ public class Game (Map map, Climber climber, IRenderer render)
                 climber.CancelJump();
             }
             return;
-
         }
         if (!map.HasGroundBelow(climber.Position))      //om climber faller 
         {
