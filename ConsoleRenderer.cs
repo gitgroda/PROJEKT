@@ -18,7 +18,9 @@ public class ConsoleRenderer : IRenderer
                 if ( obj.Position.X>= 0 && obj.Position.X < map.Width && obj.Position.Y >= 0 && obj.Position.Y < map.Height)
                 {
                     Console.SetCursorPosition(obj.Position.X, obj.Position.Y);
+                    Console.ForegroundColor = obj.Color;
                     Console.Write(obj.Symbol);
+                    Console.ResetColor();
                 }
             }
         // 3. Rita ut spelaren allra överst
