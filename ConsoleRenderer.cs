@@ -15,7 +15,7 @@ public class ConsoleRenderer : IRenderer
             //rita ut alla objekt i spelet
             foreach (var obj in gameObjects)
             {
-                if ( obj.Position.X>= 0 && obj.Position.X < map.Width && obj.Position.Y >= 0 && obj.Position.Y < map.Height)
+                if (!map.OutOfBounds(obj.Position))  //om det strular klista in obj.Position.X >= 0 && obj.Position.X < map.Width && obj.Position.Y >= 0 && obj.Position.Y < map.Height
                 {
                     Console.SetCursorPosition(obj.Position.X, obj.Position.Y);
                     Console.Write(obj.Symbol);

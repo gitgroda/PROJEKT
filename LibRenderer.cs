@@ -19,7 +19,7 @@ public class RaylibRenderer : IRenderer
         // 2. Ladda in bildfilerna från en assets-mapp
         _background      = Raylib.LoadTexture("assets/background.png");
         _climberTexture  = Raylib.LoadTexture("assets/climber.png");
-        _platformTexture = Raylib.LoadTexture("assets/platform.png");
+        _platformTexture = Raylib.LoadTexture("assets/platform.png"); 
         _ladderTexture   = Raylib.LoadTexture("assets/ladder.png");
     }
 

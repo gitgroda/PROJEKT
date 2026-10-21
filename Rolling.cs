@@ -7,7 +7,7 @@ public class Rolling : IMoveBehavior
         Position currentPos = gameObject.Position;
         Position nextPos;
         // Kontrollera om det finns mark under objektet
-        if (!map.HasGroundBelow(new Position(currentPos.X, currentPos.Y + 1)))
+        if (!map.HasGroundBelow(currentPos))
         {
             //fall neråt om mark saknas
             nextPos = new Position(currentPos.X, currentPos.Y + 1);
@@ -26,7 +26,7 @@ public class Rolling : IMoveBehavior
         }
         //uppdaterar objektets position
         gameObject.Position = nextPos;
-   
+
         
     }
 }

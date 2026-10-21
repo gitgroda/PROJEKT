@@ -5,3 +5,4 @@ public interface IGameObject
 	void Update(Map map);
 	void onCollide(Climber climber);
 }
+	

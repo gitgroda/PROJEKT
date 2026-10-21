@@ -10,6 +10,7 @@ Game game = new Game(map, climber, render);
 IMoveBehavior roll = new Rolling();
 ICollisionBehavior poison = new Poison();
 Barrel firstBarrel = new Barrel('O', new Position(79, 1), roll, poison);
+
 game.gameObjects.Add(firstBarrel);
 game.Run();
 
