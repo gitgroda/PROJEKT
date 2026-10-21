@@ -26,8 +26,10 @@ public class Map
     }
     public bool HasGroundBelow(Position pos)
     {
-        if (OutOfBounds(pos)) return false;
+        Position belowPos = new Position(pos.X, pos.Y + 1); //kollar positionen med Y + 1
 
-        return grid.GetTile(pos) == 'x' || grid.GetTile(pos) == 'H' ; //uppdatera till symbol för golv / plattform
+        if (OutOfBounds(belowPos)) return false;
+
+        return grid.GetTile(belowPos) == 'x' || grid.GetTile(belowPos) == 'H' ; //symbol för golv / plattform och stege
     }
 }

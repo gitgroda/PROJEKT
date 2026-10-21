@@ -6,3 +6,4 @@ public interface IGameObject
 	void onCollide(Climber climber);
 	ConsoleColor Color { get; }
 }
+	

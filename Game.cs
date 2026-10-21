@@ -4,6 +4,8 @@ using System.Security;
 public class Game (Map map, Climber climber, IRenderer render)
 {
     private bool isRunning;
+    private int _physicsFrameCounter = 0;
+
 
     public List<IGameObject> gameObjects = new List<IGameObject>();
     
@@ -20,8 +22,9 @@ public class Game (Map map, Climber climber, IRenderer render)
                 HandleCollision(obj);
             }
             climber.UpdatePoison();
+            UpdatePhysics();
             render.Draw(map, climber, gameObjects);
-            Thread.Sleep(33);
+            Thread.Sleep(16);
         }
     }
     private void HandleInput()
@@ -39,16 +42,19 @@ public class Game (Map map, Climber climber, IRenderer render)
         switch (key)
         {
             case ConsoleKey.LeftArrow or ConsoleKey.A:
-                TryMove((-1));
+                TryMove(-2);
                 break;
             case ConsoleKey.RightArrow or ConsoleKey.D:
-                TryMove(1);
+                TryMove(2);
                 break;
             case ConsoleKey.UpArrow or ConsoleKey.W:
-                TryClimb(-1);
+                TryClimb(-2);
                 break;
             case ConsoleKey.DownArrow or ConsoleKey.S:
-                TryClimb(1);
+                TryClimb(2);
+                break;
+            case ConsoleKey.Spacebar or ConsoleKey.F:
+                TryJump();
                 break;
             case ConsoleKey.Escape:
                 isRunning = false;
@@ -58,11 +64,14 @@ public class Game (Map map, Climber climber, IRenderer render)
     public void TryMove(int deltaX) //deltaX = +1 eller -1, deltaY = 0 då vi endast vill gå åt sidan
     {
         Position newPos = new Position(climber.Position.X + deltaX, climber.Position.Y);
-        Position newPosBelow = new Position(climber.Position.X + deltaX, climber.Position.Y + 1);
     
-        if(map.IsWalkable(newPos) && map.HasGroundBelow(newPosBelow))
+        if(map.IsWalkable(newPos) && map.HasGroundBelow(newPos))
         {
-           climber.MoveTo(newPos.X, newPos.Y);
+           climber.MoveTo(newPos);
+        }
+        else if (!map.HasGroundBelow(newPos))
+        {
+            //climber.Fall();
         }
     }
     public void TryClimb(int deltaY) //deltaY = +1 eller -1, deltaX = 0 då vi endast vill klättra
@@ -71,33 +80,67 @@ public class Game (Map map, Climber climber, IRenderer render)
 
         if(map.IsLadder(newPos))
         {
-            climber.MoveTo(climber.Position.X, climber.Position.Y + deltaY);
+            climber.MoveTo(newPos);
+        }
+    }
+    public void TryJump()
+    {
+        if (!climber.isJumping && map.HasGroundBelow(climber.Position))
+        {
+            climber.StartJump(6);
         }
     }
 //Ny metod som enbart mäter om ett objekt krockar med spelaren. Tänker att vi inte har planer på att implementera krockar mellan andra objekt? 
     private void HandleCollision(IGameObject obj)
-{
-    if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
     {
+        if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
+        {
+            obj.onCollide(climber);
+        }
         obj.onCollide(climber);
         gameObjects.Remove(obj);
 
     }
-}
-//FÖRRA METODEN. 
-   /* public void HandleCollision(IGameObject a, IGameObject b)   //Om vi kommer hit vet vi att en climber kolliderat med barrel. KOllar sedan vilken som är vilken och dela ut skada
+    private void UpdatePhysics()
     {
-        if(a is Climber c && b is Barrel bar)
+        _physicsFrameCounter++;
+        if (_physicsFrameCounter < 2) return;
+        _physicsFrameCounter = 0;
+
+        if (map.IsLadder(climber.Position))
         {
-             bar.OnCollide(c);
+            climber.CancelJump();
+            return;
         }
-        else if(a is Barrel _bar && b is Climber _c)
+
+        if (climber.isJumping)
         {
-             _bar.OnCollide(_c);
+            if (map.IsWalkable(GetAbovePos()) && !map.IsLadder(GetAbovePos()))
+            {
+                climber.MoveTo(GetAbovePos());
+                climber.DuringJump();
+            }
+            else
+            {
+                climber.CancelJump();
+            }
+            return;
+
         }
-        
+        if (!map.HasGroundBelow(climber.Position))      //om climber faller 
+        {
+            if (map.IsWalkable(GetBelowPos()))
+            {
+                climber.MoveTo(GetBelowPos()); 
+            }
+        }
+    } 
+    private Position GetBelowPos()
+    {
+        return new Position(climber.Position.X, climber.Position.Y + 1);
     }
-   */
-
-
+    private Position GetAbovePos()
+    {
+        return new Position(climber.Position.X, climber.Position.Y - 1);
+    }
 }
