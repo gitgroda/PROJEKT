@@ -17,8 +17,8 @@ public class Climber
     public void MoveTo(int targetX, int targetY) 
     {
         Position = new Position(targetX, targetY);
-
     }
     public void ApplyPoison() => poisonStatus.Apply();
     public void UpdatePoison() => poisonStatus.Update(this.HP);
+    public void ApplyHeal() => this.HP.HP =+ 1;
 }
