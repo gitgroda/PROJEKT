@@ -5,7 +5,8 @@ public class Barrel : IGameObject
     public IMoveBehavior MoveBehavior;
     public ICollisionBehavior CollisionBehavior;
     public Position Position { get; set; }
-    public Barrel(char symbol, Position position, IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior)
+    public Barrel(char symbol, Position position,
+     IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior)
     {
         Symbol = symbol;
         Position = position;
