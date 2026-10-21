@@ -23,7 +23,7 @@ public class RaylibRenderer : IRenderer
         _ladderTexture   = Raylib.LoadTexture("assets/ladder.png");
     }
 
-    public void Draw(Map map, Climber climber)
+    public void Draw(Map map, Climber climber, List<IGameObject> gameObjects)
     {
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.Black);
