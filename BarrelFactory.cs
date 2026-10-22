@@ -1,11 +1,10 @@
-public class BarrelFactory(char symbol, Position position,
+public class BarrelFactory(char symbol,
      IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior) : IGameObjectFactory
 {
-
-    public IGameObject Create()
+   
+    public void Create(Game game)
     {
-        
-        Barrel barrel = new Barrel(symbol, position, moveBehavior, collisionBehavior);
-        return barrel;
+        game.gameObjects.Add(new Barrel(symbol, new Position(79, 1), moveBehavior, collisionBehavior));
+
     }
 }

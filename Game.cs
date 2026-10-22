@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Security;
 
-public class Game (Map map, Climber climber, IRenderer render)
+public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactory barrelFactory, IGameObjectFactory potionFactory)
 {
     private bool isRunning;
     private int _physicsFrameCounter = 0;
@@ -15,17 +15,18 @@ public class Game (Map map, Climber climber, IRenderer render)
         while (isRunning)
         {
             HandleInput();
-
-            foreach (var obj in gameObjects)
+            for (int i = gameObjects.Count - 1; i >= 0; i--)
             {
+                var obj = gameObjects[i];
                 obj.Update(map);
-                if (HandleCollision(obj)) continue; 
+                HandleCollision(gameObjects[i]);
+              
             }
             
             climber.UpdatePoison();
             UpdatePhysics();
             render.Draw(map, climber, gameObjects);
-            Thread.Sleep(16);
+            Thread.Sleep(8);
         }
     }
     private void HandleInput()
@@ -62,17 +63,13 @@ public class Game (Map map, Climber climber, IRenderer render)
                 break;
         }
     }
-    public void TryMove(int deltaX) //deltaX = +1 eller -1, deltaY = 0 då vi endast vill gå åt sidan
+    public void TryMove(int deltaX) 
     {
         Position newPos = new Position(climber.Position.X + deltaX, climber.Position.Y);
     
         if(map.IsWalkable(newPos) && map.HasGroundBelow(newPos))
         {
            climber.MoveTo(newPos);
-        }
-        else if (!map.HasGroundBelow(newPos))
-        {
-            //climber.Fall();
         }
     }
     public void TryClimb(int deltaY) //deltaY = +1 eller -1, deltaX = 0 då vi endast vill klättra
@@ -92,15 +89,13 @@ public class Game (Map map, Climber climber, IRenderer render)
         }
     }
 //Ny metod som enbart mäter om ett objekt krockar med spelaren. Tänker att vi inte har planer på att implementera krockar mellan andra objekt? 
-    private bool HandleCollision(IGameObject obj)
+    private void HandleCollision(IGameObject obj)
     {
         if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
         {
             obj.onCollide(climber);
             gameObjects.Remove(obj);
-            return true;
         }
-        return false;
     }
     private void UpdatePhysics()
     {

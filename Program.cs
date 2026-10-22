@@ -1,25 +1,24 @@
 ﻿Console.Clear();
 Console.CursorVisible = false;
 Map map = new Map(80, 24);
-
 Climber climber = new Climber(new Position(5, map.Height - 2), new Health(5));
-
 IRenderer render = new ConsoleRenderer();
 
-Game game = new Game(map, climber, render);
-IMoveBehavior roll = new Rolling();
-ICollisionBehavior poison = new Poison();
+IGameObjectFactory barrelFactory = new BarrelFactory('b', new Rolling(), new NormalCollide());
+IGameObjectFactory potionFactory = new PotionFactory('p', new Heal());
 
-Barrel firstBarrel = new Barrel('O', new Position(79, 1), roll, poison);
+Game game = new Game(map, climber, render, barrelFactory, potionFactory);
 
-game.gameObjects.Add(firstBarrel);
+
+
+
+
+
+
+//Barrel firstBarrel = new Barrel('O', new Position(79, 1), new Rolling(), new Poison());
+
+
+
+barrelFactory.Create(game);
+potionFactory.Create(game);
 game.Run();
-
-
-
-
-
-
-
-
-

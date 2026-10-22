@@ -15,8 +15,9 @@ public class Potion : IGameObject
         CollisionBehavior = collisionBehavior;
     }
 	public void Update(Map map)
-	{
-	}
+    {
+        
+    }
     public void onCollide(Climber climber)
     {
         CollisionBehavior.Collide(climber);
