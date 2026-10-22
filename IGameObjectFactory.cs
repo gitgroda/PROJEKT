@@ -1,4 +1,4 @@
 public interface IGameObjectFactory
 {
-    public IGameObject Create();
+    public void Create(Game game);
 }

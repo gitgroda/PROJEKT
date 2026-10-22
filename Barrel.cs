@@ -6,6 +6,8 @@ public class Barrel : IGameObject
     public ICollisionBehavior CollisionBehavior;
     public ConsoleColor Color => CollisionBehavior.EffectColor;
     public Position Position { get; set; }
+    
+
     public Barrel(char symbol, Position position,
      IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior)
     {

@@ -1,9 +1,9 @@
-public class PotionFactory(char symbol, Position position,
+public class PotionFactory(char symbol,
       ICollisionBehavior collisionBehavior) : IGameObjectFactory
 {
-    public IGameObject Create()
+    public void Create(Game game)
     {
-        Potion potion = new Potion(symbol, position, collisionBehavior);
-        return potion;
+        game.gameObjects.Add(new Potion(symbol, new Position(73, 7), collisionBehavior));
+
     }
 }

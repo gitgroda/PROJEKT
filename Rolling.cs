@@ -4,6 +4,7 @@ public class Rolling : IMoveBehavior
     private bool _wasFalling = false;
     public void Move(IGameObject gameObject, Map map)
     {
+
         Position currentPos = gameObject.Position;
         Position nextPos;
         // Kontrollera om det finns mark under objektet
@@ -12,6 +13,7 @@ public class Rolling : IMoveBehavior
             //fall neråt om mark saknas
             nextPos = new Position(currentPos.X, currentPos.Y + 1);
             _wasFalling = true;
+
         }
         else
         {
