@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Security;
 
-public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactory barrelFactory, IGameObjectFactory potionFactory)
+public class Game (Map map, Climber climber, IRenderer render)
 {
     private bool isRunning;
     private CollisionDetector collisionDetector = new CollisionDetector();

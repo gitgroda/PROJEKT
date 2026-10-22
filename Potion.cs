@@ -3,10 +3,9 @@ using System.Runtime.Versioning;
 public class Potion : IGameObject
 {
 	
-	public char Symbol { get; }
-	public Position Position { get; set; }
-	public ICollisionBehavior CollisionBehavior;
-	public ConsoleColor Color => CollisionBehavior.EffectColor;
+	private char Symbol;
+	private Position Position;
+	private ICollisionBehavior CollisionBehavior;
 	public Potion(char symbol, Position position,
       ICollisionBehavior collisionBehavior)
     {
@@ -23,5 +22,13 @@ public class Potion : IGameObject
         CollisionBehavior.Collide(climber);
     }
 	
+    public void Draw(IRenderer renderer)
+    {
+        renderer.DrawSprite(Position, Symbol, CollisionBehavior.GetEffectColor());
+    }
+    public bool IsAt(Position position)
+    {
+        return Position == position; 
+    }
 
 }

@@ -1,8 +1,8 @@
 public class NormalCollide : ICollisionBehavior
 {
-    public ConsoleColor EffectColor => ConsoleColor.Red;
+    public ConsoleColor GetEffectColor() => ConsoleColor.Red;
     public void Collide(Climber climber)
     {
-        climber.HP -= 1;
+        climber.TakeDamage();
     }
 }

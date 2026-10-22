@@ -4,7 +4,6 @@ public class BarrelFactory(char symbol,
    
     public void Create(Game game)
     {
-        game.gameObjects.Add(new Barrel(symbol, new Position(79, 1), moveBehavior, collisionBehavior));
-
+        game.AddGameObject(new Barrel(symbol, new Position(79, 1), moveBehavior, collisionBehavior));
     }
 }
