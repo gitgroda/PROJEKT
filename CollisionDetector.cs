@@ -4,7 +4,7 @@ public class CollisionDetector
     {
         if (climber.IsCollidingWith(obj))
         {
-            obj.onCollide(climber);
+            obj.OnCollide(climber);
             return true;
         }
         return false;

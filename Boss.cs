@@ -1,9 +1,9 @@
 public class Boss
 {
-    private Position Position {get; }
-    private char Symbol = 'D';
+    private Position _position;
+    private char _symbol = 'D';
     public Boss(Position position)
     {
-        Position = position;
+        _position = position;
     }
 }

@@ -1,4 +1,4 @@
 public interface IMoveBehavior
 {
-Position Move(Position currentPosition, Map map);
+Position Move (Position currentPosition, Map map);
 }

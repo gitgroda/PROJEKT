@@ -2,34 +2,31 @@ using System;
 
 public class PoisonEffect
 {
-    private bool isActive = false;
-    private DateTime poisonStartTime;
-    private DateTime lastPoisonDamageTime;
-    private int poisonDamageIntervall = 3000;
-    private int poisonDuration = 10000;
+    private bool _isActive = false;
+    private DateTime _poisonStartTime;
+    private DateTime _lastPoisonDamageTime;
+    private int _poisonDamageIntervall = 3000;
+    private int _poisonDuration = 10000;
     public void Apply()
     {
-        isActive = true;
+        _isActive = true;
         DateTime now = DateTime.Now;
-        poisonStartTime = now;
-        lastPoisonDamageTime = now;
+        _poisonStartTime = now;
+        _lastPoisonDamageTime = now;
     }
     public void Update(int targetHealth)
     {
-        if (!isActive) return; 
-
+        if (!_isActive) return;
         DateTime now = DateTime.Now;
-        
-        if ((now - poisonStartTime).TotalMilliseconds >= poisonDuration)
+        if ((now - _poisonStartTime).TotalMilliseconds >= _poisonDuration)
         {
-            isActive = false;
+            _isActive = false;
             return;
         }
-
-        if ((now - lastPoisonDamageTime).TotalMilliseconds >= poisonDamageIntervall)
+        if ((now - _lastPoisonDamageTime).TotalMilliseconds >= _poisonDamageIntervall)
         {
             targetHealth -= 1; // (Anpassa efter hur din Health-klass ser ut)
-            lastPoisonDamageTime = now;
+            _lastPoisonDamageTime = now;
         }
-}
+    }
 }

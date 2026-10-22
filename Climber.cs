@@ -4,35 +4,36 @@ public class Climber
 {
     private int _physicsFrameCounter = 0;
 
-    private Position Position;
-    private int HP;
-    private char Symbol = '@';
-    private PoisonEffect poisonStatus = new PoisonEffect();
-    private bool isJumping;
-    private int JumpTicksLeft;
-    public void TakeDamage() => HP -= 1;
+    private Position _position;
+    private int _hp;
+    private char _symbol = '@';
+    private PoisonEffect _poisonStatus = new PoisonEffect();
+    private bool _isJumping;
+    private int _jumpTicksLeft;
+    public void TakeDamage() => _hp -= 1;
+  
 
-    public Climber(Position position, int hp)
+    public Climber(int hp)
     {
-        Position = position;
-        HP = hp;
+        _position = new Position(5, 22);
+        _hp = hp;
     }
     public void Draw(IRenderer renderer)
     {
-        renderer.DrawSprite(Position, Symbol, ConsoleColor.White);
+        renderer.DrawSprite(_position, _symbol, ConsoleColor.White);
     }
     public bool IsCollidingWith(IGameObject obj)
     {
-        return obj.IsAt(Position);
+        return obj.IsAt(_position);
     }
     public void MoveTo(Position position) 
     {
-        Position = position;
+        _position = position;
     }
 
     public void TryClimb(int deltaY, Map map) //deltaY = +1 eller -1, deltaX = 0 då vi endast vill klättra
     {
-        Position newPos = new Position(Position.X, Position.Y + deltaY);
+        Position newPos = new Position(_position.X, _position.Y + deltaY);
 
         if(map.IsLadder(newPos))
         {
@@ -42,7 +43,7 @@ public class Climber
 
     public void TryMove(int deltaX, Map map) 
     {
-        Position newPos = new Position(Position.X + deltaX, Position.Y);
+        Position newPos = new Position(_position.X + deltaX, _position.Y);
 
         if(map.IsWalkable(newPos) && map.HasGroundBelow(newPos))
         {
@@ -51,28 +52,28 @@ public class Climber
     }
        public void TryJump(Map map)
     {
-        if (!isJumping && map.HasGroundBelow(Position))
+        if (!_isJumping && map.HasGroundBelow(_position))
         {
             StartJump(6);
         }
     }
     public void StartJump(int ticks)
     {
-        isJumping = true;
-        JumpTicksLeft = ticks;
+        _isJumping = true;
+        _jumpTicksLeft = ticks;
     }
     public void DuringJump()
     {
-        JumpTicksLeft--;
-        if (JumpTicksLeft <= 0)
+        _jumpTicksLeft--;
+        if (_jumpTicksLeft <= 0)
         {
-            isJumping = false;
+            _isJumping = false;
         }
     }
     public void CancelJump()
     {
-        isJumping = false;
-        JumpTicksLeft = 0;
+        _isJumping = false;
+        _jumpTicksLeft = 0;
     }
     public void UpdatePhysics(Map map)
     {
@@ -80,12 +81,12 @@ public class Climber
         if (_physicsFrameCounter < 2) return;
         _physicsFrameCounter = 0;
 
-        if (map.IsLadder(Position))
+        if (map.IsLadder(_position))
         {
             CancelJump();
             return;
         }
-        if (isJumping)
+        if (_isJumping)
         {
             if (map.IsWalkable(GetAbovePos()) && !map.IsLadder(GetAbovePos()))
             {
@@ -98,7 +99,7 @@ public class Climber
             }
             return;
         }
-        if (!map.HasGroundBelow(Position))      //om climber faller 
+        if (!map.HasGroundBelow(_position))      //om climber faller 
         {
             if (map.IsWalkable(GetBelowPos()))
             {
@@ -110,13 +111,13 @@ public class Climber
     //Vi måste ändra dessa privata metoder senare
     private Position GetBelowPos()
     {
-        return new Position(Position.X, Position.Y + 1);
+        return new Position(_position.X, _position.Y + 1);
     }
     private Position GetAbovePos()
     {
-        return new Position(Position.X, Position.Y - 1);
+        return new Position(_position.X, _position.Y - 1);
     }
-    public void ApplyPoison() => poisonStatus.Apply();
-    public void UpdatePoison() => poisonStatus.Update(HP);
-    public void ApplyHeal() => HP =+ 1;
+    public void ApplyPoison() => _poisonStatus.Apply();
+    public void UpdatePoison() => _poisonStatus.Update(_hp);
+    public void ApplyHeal() => _hp =+ 1;
 }

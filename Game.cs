@@ -3,57 +3,46 @@ using System.Security;
 
 public class Game (Map map, Climber climber, IRenderer render)
 {
-    private bool isRunning;
-    private CollisionDetector collisionDetector = new CollisionDetector();
-
-
-    private List<IGameObject> gameObjects = new List<IGameObject>();
+    private bool _isRunning;
+    private CollisionDetector _collisionDetector = new CollisionDetector();
+    private List<IGameObject> _gameObjects = new List<IGameObject>();
     public void AddGameObject(IGameObject obj)
     {
-        gameObjects.Add(obj);
+        _gameObjects.Add(obj);
     }
-    
     public void Run()
     {
-        isRunning = true;
-        while (isRunning)
+        _isRunning = true;
+        while (_isRunning)
         {
             HandleInput();
-            for (int i = gameObjects.Count - 1; i >= 0; i--)
+            for (int i = _gameObjects.Count - 1; i >= 0; i--)
             {
-                var obj = gameObjects[i];
+                var obj = _gameObjects[i];
                 obj.Update(map);
                 
-                if (collisionDetector.CheckCollsion(obj, climber))
+                if (_collisionDetector.CheckCollsion(obj, climber))
                 {
-                    gameObjects.RemoveAt(i);
+                    _gameObjects.RemoveAt(i);
                 }
             }
-            
             climber.UpdatePhysics(map);
             render.DrawMap(map);
-
-    for (int i = 0; i < gameObjects.Count; i++)
-{
-    gameObjects[i].Draw(render);
-}
-
-climber.Draw(render);
-
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].Draw(render);
+            }
+            climber.Draw(render);
         }
     }
     private void HandleInput()
     {
         if (!Console.KeyAvailable) return;
-
-        ConsoleKey key = ConsoleKey.Escape; // sätter en start key som inte gör något
-
-    // När man håller in en tangent buffras en kö med tangenttryckningar. Detta sättet sparar enbart den senaste tryckningen så att climbern inte fortsätter röra sig när man släpper tangenten.
+        ConsoleKey key = ConsoleKey.Escape; 
     while (Console.KeyAvailable)
     {
         key = Console.ReadKey(intercept: true).Key;
     }
-
         switch (key)
         {
             case ConsoleKey.LeftArrow or ConsoleKey.A:
@@ -72,9 +61,8 @@ climber.Draw(render);
                 climber.TryJump(map);
                 break;
             case ConsoleKey.Escape:
-                isRunning = false;
+                _isRunning = false;
                 break;
         }
     }
-
 }

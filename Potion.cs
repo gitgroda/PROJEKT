@@ -3,32 +3,32 @@ using System.Runtime.Versioning;
 public class Potion : IGameObject
 {
 	
-	private char Symbol;
-	private Position Position;
-	private ICollisionBehavior CollisionBehavior;
+	private char _symbol;
+	private Position _position;
+	private ICollisionBehavior _collisionBehavior;
 	public Potion(char symbol, Position position,
       ICollisionBehavior collisionBehavior)
     {
-        Symbol = symbol;
-        Position = position;
-        CollisionBehavior = collisionBehavior;
+        _symbol = symbol;
+        _position = position;
+        _collisionBehavior = collisionBehavior;
     }
 	public void Update(Map map)
     {
         
     }
-    public void onCollide(Climber climber)
+    public void OnCollide(Climber climber)
     {
-        CollisionBehavior.Collide(climber);
+        _collisionBehavior.Collide(climber);
     }
 	
     public void Draw(IRenderer renderer)
     {
-        renderer.DrawSprite(Position, Symbol, CollisionBehavior.GetEffectColor());
+        renderer.DrawSprite(_position, _symbol, _collisionBehavior.GetEffectColor());
     }
     public bool IsAt(Position position)
     {
-        return Position == position; 
+        return _position == position; 
     }
 
 }

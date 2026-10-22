@@ -8,5 +8,4 @@ public readonly record struct Position
         this.X = X;
         this.Y = Y;
     }
-    
 }
