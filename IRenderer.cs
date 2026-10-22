@@ -1,4 +1,5 @@
 public interface IRenderer
 {
-    public void Draw(Map map, Climber climber, List<IGameObject> gameObjects);
+    void DrawMap(Map map); // Vi bryter ut kartritningen
+    void DrawSprite(Position position, char symbol, ConsoleColor color);
 }

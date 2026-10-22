@@ -4,9 +4,14 @@ using System.Security;
 public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactory barrelFactory, IGameObjectFactory potionFactory)
 {
     private bool isRunning;
+    private CollisionDetector collisionDetector = new CollisionDetector();
 
 
-    public List<IGameObject> gameObjects = new List<IGameObject>();
+    private List<IGameObject> gameObjects = new List<IGameObject>();
+    public void AddGameObject(IGameObject obj)
+    {
+        gameObjects.Add(obj);
+    }
     
     public void Run()
     {
@@ -18,11 +23,22 @@ public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactor
             {
                 var obj = gameObjects[i];
                 obj.Update(map);
-                HandleCollision(gameObjects[i]);
+                
+                if (collisionDetector.CheckCollsion(obj, climber))
+                {
+                    gameObjects.RemoveAt(i);
+                }
             }
             
             climber.UpdatePhysics(map);
-            render.Draw(map, climber, gameObjects);
+            render.DrawMap(map);
+
+    for (int i = 0; i < gameObjects.Count; i++)
+{
+    gameObjects[i].Draw(render);
+}
+
+climber.Draw(render);
 
         }
     }
@@ -60,12 +76,5 @@ public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactor
                 break;
         }
     }
-    private void HandleCollision(IGameObject obj)
-    {
-        if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
-        {
-            obj.onCollide(climber);
-            gameObjects.Remove(obj);
-        }
-    }
+
 }
