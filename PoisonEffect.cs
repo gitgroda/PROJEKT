@@ -14,7 +14,7 @@ public class PoisonEffect
         poisonStartTime = now;
         lastPoisonDamageTime = now;
     }
-    public void Update(Health targetHealth)
+    public void Update(int targetHealth)
     {
         if (!isActive) return; 
 
@@ -28,7 +28,7 @@ public class PoisonEffect
 
         if ((now - lastPoisonDamageTime).TotalMilliseconds >= poisonDamageIntervall)
         {
-            targetHealth.HP -= 1; // (Anpassa efter hur din Health-klass ser ut)
+            targetHealth -= 1; // (Anpassa efter hur din Health-klass ser ut)
             lastPoisonDamageTime = now;
         }
 }

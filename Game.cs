@@ -4,7 +4,6 @@ using System.Security;
 public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactory barrelFactory, IGameObjectFactory potionFactory)
 {
     private bool isRunning;
-    private int _physicsFrameCounter = 0;
 
 
     public List<IGameObject> gameObjects = new List<IGameObject>();
@@ -20,13 +19,11 @@ public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactor
                 var obj = gameObjects[i];
                 obj.Update(map);
                 HandleCollision(gameObjects[i]);
-              
             }
             
-            climber.UpdatePoison();
-            UpdatePhysics();
+            climber.UpdatePhysics(map);
             render.Draw(map, climber, gameObjects);
-            Thread.Sleep(8);
+
         }
     }
     private void HandleInput()
@@ -44,51 +41,25 @@ public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactor
         switch (key)
         {
             case ConsoleKey.LeftArrow or ConsoleKey.A:
-                TryMove(-1);
+                climber.TryMove(-1, map);
                 break;
             case ConsoleKey.RightArrow or ConsoleKey.D:
-                TryMove(1);
+                climber.TryMove(1, map);
                 break;
             case ConsoleKey.UpArrow or ConsoleKey.W:
-                TryClimb(-1);
+                climber.TryClimb(-1, map);
                 break;
             case ConsoleKey.DownArrow or ConsoleKey.S:
-                TryClimb(1);
+                climber.TryClimb(1, map);
                 break;
             case ConsoleKey.Spacebar or ConsoleKey.F:
-                TryJump();
+                climber.TryJump(map);
                 break;
             case ConsoleKey.Escape:
                 isRunning = false;
                 break;
         }
     }
-    public void TryMove(int deltaX) 
-    {
-        Position newPos = new Position(climber.Position.X + deltaX, climber.Position.Y);
-    
-        if(map.IsWalkable(newPos) && map.HasGroundBelow(newPos))
-        {
-           climber.MoveTo(newPos);
-        }
-    }
-    public void TryClimb(int deltaY) //deltaY = +1 eller -1, deltaX = 0 då vi endast vill klättra
-    {
-        Position newPos = new Position(climber.Position.X, climber.Position.Y + deltaY);
-
-        if(map.IsLadder(newPos))
-        {
-            climber.MoveTo(newPos);
-        }
-    }
-    public void TryJump()
-    {
-        if (!climber.isJumping && map.HasGroundBelow(climber.Position))
-        {
-            climber.StartJump(6);
-        }
-    }
-//Ny metod som enbart mäter om ett objekt krockar med spelaren. Tänker att vi inte har planer på att implementera krockar mellan andra objekt? 
     private void HandleCollision(IGameObject obj)
     {
         if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
@@ -96,45 +67,5 @@ public class Game (Map map, Climber climber, IRenderer render, IGameObjectFactor
             obj.onCollide(climber);
             gameObjects.Remove(obj);
         }
-    }
-    private void UpdatePhysics()
-    {
-        _physicsFrameCounter++;
-        if (_physicsFrameCounter < 2) return;
-        _physicsFrameCounter = 0;
-
-        if (map.IsLadder(climber.Position))
-        {
-            climber.CancelJump();
-            return;
-        }
-        if (climber.isJumping)
-        {
-            if (map.IsWalkable(GetAbovePos()) && !map.IsLadder(GetAbovePos()))
-            {
-                climber.MoveTo(GetAbovePos());
-                climber.DuringJump();
-            }
-            else
-            {
-                climber.CancelJump();
-            }
-            return;
-        }
-        if (!map.HasGroundBelow(climber.Position))      //om climber faller 
-        {
-            if (map.IsWalkable(GetBelowPos()))
-            {
-                climber.MoveTo(GetBelowPos()); 
-            }
-        }
-    } 
-    private Position GetBelowPos()
-    {
-        return new Position(climber.Position.X, climber.Position.Y + 1);
-    }
-    private Position GetAbovePos()
-    {
-        return new Position(climber.Position.X, climber.Position.Y - 1);
     }
 }
