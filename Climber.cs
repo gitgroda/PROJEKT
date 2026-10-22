@@ -4,17 +4,25 @@ public class Climber
 {
     private int _physicsFrameCounter = 0;
 
-    public Position Position {get; private set;}
-    public int HP {get; set;}
-    public char Symbol {get; } = '@';
+    private Position Position;
+    private int HP;
+    private char Symbol = '@';
     private PoisonEffect poisonStatus = new PoisonEffect();
-    public bool isJumping { get; private set; }
-    public int JumpTicksLeft { get; private set; }
+    private bool isJumping;
+    private int JumpTicksLeft;
 
     public Climber(Position position, int hp)
     {
         Position = position;
         HP = hp;
+    }
+    public void Draw(IRenderer renderer)
+    {
+        renderer.DrawSprite(Position, Symbol, ConsoleColor.White);
+    }
+    public bool IsCollidingWith(IGameObject obj)
+    {
+        return obj.IsAt(Position);
     }
     public void MoveTo(Position position) 
     {
@@ -97,6 +105,8 @@ public class Climber
             }
         }
     } 
+
+    //Vi måste ändra dessa privata metoder senare
     private Position GetBelowPos()
     {
         return new Position(Position.X, Position.Y + 1);
