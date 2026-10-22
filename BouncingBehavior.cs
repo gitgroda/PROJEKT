@@ -3,9 +3,10 @@ public class BouncingBehavior : IMoveBehavior
     private int direction = 1; // 1 = höger, -1 = vänster
     private int bounceTicksLeft = 0;
     private int maxBounceHeight = 1;
-    public void Move(IGameObject gameObject, Map map)
+    public Position Move(Position currentPosition, Map map)
     {
-        int x = gameObject.Position.X, y = gameObject.Position.Y;
+        int x = currentPosition.X, y = currentPosition.Y;
+
         if (!map.IsWalkable(new Position(x + direction, y)))
         direction *= -1;
         x += direction;
@@ -20,9 +21,8 @@ public class BouncingBehavior : IMoveBehavior
             if (!map.HasGroundBelow(new Position(x, y))) y++; 
             else bounceTicksLeft = maxBounceHeight; 
         }
-
-        gameObject.Position = new Position(x, y);
         Thread.Sleep(16);
+        return new Position(x, y);
     }
     
 }

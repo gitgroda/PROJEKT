@@ -4,14 +4,14 @@ using System.Security.Cryptography.X509Certificates;
 public class Grid
 {
     private char[,] tiles;
-    public int Width { get; }
-    public int Height { get; }
+    private int Width;
+    private int Height;
 
     public Grid(int width, int height) 
     {
-        this.Width = width;
-        this.Height = height;
-        this.tiles = new char[Width, Height]; //2d array tar [X-kordinat, Y-kordnat]
+        Width = width;
+        Height = height;
+        tiles = new char[Width, Height]; //2d array tar [X-kordinat, Y-kordnat]
         for (int y = 0; y < Height; y++)
         { 
             for (int x = 0; x < Width; x++)
@@ -21,26 +21,26 @@ public class Grid
         }
         Buildlevel();
     }
+    public int GetWidth() => Width;
+    public int GetHeight() => Height;
     private void Buildlevel() //göra randomised build level istället för att leveln alltid ser likadan ut? 
     {
-        int width = Width;
-        int height = Height;
 
         for (int floor = 0; floor < 5; floor++)
         {
-            int floorY = height - 1 - (floor * 5); //Sätter varje våning 5 rader över den förra, golvet börjar på height - 2 eller height?
-            for(int x = 0; x < width; x++)
+            int floorY = Height - 1 - (floor * 5); //Sätter varje våning 5 rader över den förra, golvet börjar på Height - 2 eller Height?
+            for(int x = 0; x < Width; x++)
            {
                 // Lämnar luckor för tunnorna att falla ner
                 if (floor % 2 == 0 && floor != 0 && x < 4) continue;
-                if (floor % 2 != 0 && x > width - 5) continue;
+                if (floor % 2 != 0 && x > Width - 5) continue;
 
                 SetTile(new Position(x, floorY), 'x'); // Golv = x
             }
             // Lägg till en stege (förutom på bottenvåningen)
             if (floor > 0)
             {
-                int ladderX = (floor % 2 == 0) ? 5 : width - 6;
+                int ladderX = (floor % 2 == 0) ? 5 : Width - 6;
                 for (int y = floorY; y < floorY + 5; y++)
                 {
                     SetTile(new Position(ladderX, y), 'H'); // Stege

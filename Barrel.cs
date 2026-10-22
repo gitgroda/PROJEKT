@@ -4,7 +4,7 @@ public class Barrel : IGameObject
     private char Symbol {get;}
     private IMoveBehavior MoveBehavior;
     private ICollisionBehavior CollisionBehavior;
-    private ConsoleColor Color => CollisionBehavior.EffectColor;
+  
     private Position Position { get; set; }
     
 
@@ -16,11 +16,11 @@ public class Barrel : IGameObject
         MoveBehavior = moveBehavior;
         CollisionBehavior = collisionBehavior;
     }
-    public void Update(Map map) => MoveBehavior.Move(this, map);
+    public void Update(Map map) => Position = MoveBehavior.Move(Position, map);
     public void onCollide(Climber climber) => CollisionBehavior.Collide(climber);
     public void Draw(IRenderer renderer)
     {
-        renderer.DrawSprite(Position, Symbol, CollisionBehavior.EffectColor);
+        renderer.DrawSprite(Position, Symbol, CollisionBehavior.GetEffectColor());
     }
     public bool IsAt(Position position)
 {

@@ -2,16 +2,14 @@ public class RollingBehavior : IMoveBehavior
 {
     private int _direction = 1; // 1 = höger, -1 = vänster
     private bool _wasFalling = false;
-    public void Move(IGameObject gameObject, Map map)
+    public Position Move(Position currentPosition, Map map)
     {
-
-        Position currentPos = gameObject.Position;
         Position nextPos;
         // Kontrollera om det finns mark under objektet
-        if (!map.HasGroundBelow(currentPos))
+        if (!map.HasGroundBelow(currentPosition))
         {
             //fall neråt om mark saknas
-            nextPos = new Position(currentPos.X, currentPos.Y + 1);
+            nextPos = new Position(currentPosition.X, currentPosition.Y + 1);
             _wasFalling = true;
 
         }
@@ -24,12 +22,10 @@ public class RollingBehavior : IMoveBehavior
                 _wasFalling = false;
             }
             //fortsätt rulla med nya riktningen
-            nextPos = new Position(currentPos.X + _direction, currentPos.Y);
+            nextPos = new Position(currentPosition.X + _direction, currentPosition.Y);
         }
         //uppdaterar objektets position
-        gameObject.Position = nextPos;
-
-        
+       return nextPos;
     }
 
 }

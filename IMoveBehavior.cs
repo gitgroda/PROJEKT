@@ -1,4 +1,4 @@
 public interface IMoveBehavior
 {
-void Move(IGameObject gameObject, Map map);
+Position Move(Position currentPosition, Map map);
 }

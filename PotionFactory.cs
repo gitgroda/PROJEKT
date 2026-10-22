@@ -3,7 +3,7 @@ public class PotionFactory(char symbol,
 {
     public void Create(Game game)
     {
-        game.gameObjects.Add(new Potion(symbol, new Position(73, 7), collisionBehavior));
+        game.AddGameObject(new Potion(symbol, new Position(73, 7), collisionBehavior));
 
     }
 }

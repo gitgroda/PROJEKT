@@ -1,5 +1,5 @@
 public interface ICollisionBehavior
 {
-    ConsoleColor EffectColor {get;}
+    ConsoleColor GetEffectColor();
     void Collide(Climber climber);
 }

@@ -2,7 +2,7 @@ using System;
 
 public class PoisonEffect
 {
-    public bool isActive = false;
+    private bool isActive = false;
     private DateTime poisonStartTime;
     private DateTime lastPoisonDamageTime;
     private int poisonDamageIntervall = 3000;

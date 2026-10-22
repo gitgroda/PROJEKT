@@ -10,6 +10,7 @@ public class Climber
     private PoisonEffect poisonStatus = new PoisonEffect();
     private bool isJumping;
     private int JumpTicksLeft;
+    public void TakeDamage() => HP -= 1;
 
     public Climber(Position position, int hp)
     {
@@ -28,13 +29,7 @@ public class Climber
     {
         Position = position;
     }
-    public void TryJump(Map map)
-    {
-        if (!isJumping && map.HasGroundBelow(Position))
-        {
-            StartJump(6);
-        }
-    }
+
     public void TryClimb(int deltaY, Map map) //deltaY = +1 eller -1, deltaX = 0 då vi endast vill klättra
     {
         Position newPos = new Position(Position.X, Position.Y + deltaY);
@@ -54,7 +49,13 @@ public class Climber
            MoveTo(newPos);
         }
     }
-   
+       public void TryJump(Map map)
+    {
+        if (!isJumping && map.HasGroundBelow(Position))
+        {
+            StartJump(6);
+        }
+    }
     public void StartJump(int ticks)
     {
         isJumping = true;

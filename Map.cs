@@ -4,19 +4,19 @@ using System.Security.Principal;
 
 public class Map
 {
-    public Grid grid { get; }
+    private Grid grid;
     
 
     public Map(int width, int height)
     {
         grid = new Grid(width, height);
     }
-    public int Width => grid.Width;
-    public int Height => grid.Height;
+    public int GetWidth() => grid.GetWidth();
+    public int GetHeight() => grid.GetHeight();
 
     public char GetTile(Position pos) => grid.GetTile(pos);
     public void SetTile(Position pos, char tile) => grid.SetTile(pos, tile);
-    public bool OutOfBounds(Position pos) => pos.X < 0 || pos.X >= Width || pos.Y < 0 || pos.Y >= Height;
+    public bool OutOfBounds(Position pos) => pos.X < 0 || pos.X >= GetWidth() || pos.Y < 0 || pos.Y >= GetHeight();
     public bool IsWalkable(Position pos) => !OutOfBounds(pos) && (grid.GetTile(pos) != 'x');
     public bool IsLadder(Position pos)
     {
