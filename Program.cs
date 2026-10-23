@@ -7,6 +7,7 @@ IRenderer render = new ConsoleRenderer();
 
 IGameObjectFactory bouncyBarrel = new BarrelFactory('@', new BouncingBehavior(), new NormalCollide());
 IGameObjectFactory poisonBarrel = new BarrelFactory('@', new RollingBehavior(), new PoisonCollide());
+IGameObjectFactory firetrapFactory = new FiretrapFactory('^', new NormalCollide());
 
 IGameObjectFactory potionFactory = new PotionFactory('p', new Heal());
 
@@ -15,6 +16,8 @@ Game game = new Game(map, climber, render);
 
 bouncyBarrel.Create(game);
 poisonBarrel.Create(game);
+firetrapFactory.Create(game);
 potionFactory.Create(game);
+
 
 game.Run();
