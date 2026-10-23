@@ -1,10 +1,10 @@
 public class BarrelFactory(char symbol,
-     IMoveBehavior moveBehavior, 
-     ICollisionBehavior collisionBehavior) : IGameObjectFactory
+     Func<IMoveBehavior> createMoveBehavior, 
+     Func<ICollisionBehavior> createCollisionBehavior) : IGameObjectFactory
 {
-   
     public void Create(Game game)
     {
-        game.AddGameObject(new Barrel(symbol, new Position(79, 1), moveBehavior, collisionBehavior));
+        // Vi anropar delegaterna för att skapa NYA instanser för varje tunna
+        game.AddGameObject(new Barrel(symbol, new Position(15, 1), createMoveBehavior(), createCollisionBehavior()));
     }
 }
