@@ -1,8 +1,9 @@
 - Grid och game, vi har get-metoder för att få privata width- och height- fält. Funkar detta? (tell don't ask)
-- I Climber har vi två privata hjälpmetoder längst ner (Getabovepos och getbelowpos). Får vi ha dessa eller ska vi strunta i dem och bara klistra in deras logik i Updatephysics? 
-- Metoder som har fler än 20 rader kod(Updatephysics i Climber) - vi kan ju "fula" oss och flytta rader till samma rad och på så sätt uppfylla kraven men med sämre läsbarhet.
-- Behöver vi göra int x och y i class Position privata och sedan göra Getx() & GetY() för dem? 
-- Implementera kravet om Generics i Grid? Är det vettigt? Vi kommer inte riktigt på någon anledning till varför vi skulle göra det. Visst det kanske breddar användningsområdet för grid-klassen 
-men för vårat spel kommer införandet av Generics inte kännas meningsfullt. 
 
+- I Climber har vi två privata hjälpmetoder längst ner (Getabovepos och getbelowpos). Får vi ha dessa eller ska vi strunta i dem och bara klistra in deras logik i Updatephysics?
+
+- Metoder som har fler än 20 rader kod(Updatephysics i Climber) - vi kan ju "fula" oss och flytta rader till samma rad och på så sätt uppfylla kraven men med sämre läsbarhet.
+
+- Behöver vi göra int x och y i class Position privata och sedan göra Getx() & GetY() för dem? 
+- Implementera kravet om Generics i Grid? 
 

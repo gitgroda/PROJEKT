@@ -1,13 +1,7 @@
-public class FiretrapFactory : IGameObjectFactory
+public class FiretrapFactory(
+    char _symbol, 
+    ICollisionBehavior _collisionBehavior) : IGameObjectFactory
 {
-    private char _symbol;
-    private ICollisionBehavior _collisionBehavior;
-
-    public FiretrapFactory(char symbol, ICollisionBehavior collisionBehavior)
-    {
-        _symbol = symbol;
-        _collisionBehavior = collisionBehavior;
-    }
 
     public void Create(Game game)
     {

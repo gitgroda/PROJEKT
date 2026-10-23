@@ -14,19 +14,21 @@ public class PoisonEffect
         _poisonStartTime = now;
         _lastPoisonDamageTime = now;
     }
-    public void Update(int targetHealth)
+    public bool ShouldDamage()
     {
-        if (!_isActive) return;
+        if (!_isActive) return false;
+
         DateTime now = DateTime.Now;
         if ((now - _poisonStartTime).TotalMilliseconds >= _poisonDuration)
         {
             _isActive = false;
-            return;
+            return false;
         }
         if ((now - _lastPoisonDamageTime).TotalMilliseconds >= _poisonDamageIntervall)
         {
-            targetHealth -= 1; // (Anpassa efter hur din Health-klass ser ut)
             _lastPoisonDamageTime = now;
+            return true; // 
         }
+        return false;
     }
 }

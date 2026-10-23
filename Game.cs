@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using System.Security;
 
-public class Game (Map map, Climber climber, IRenderer render)
+public class Game (Map map, Climber climber, IRenderer render, SpawnManager spawner)
 {
     private bool _isRunning;
     private CollisionDetector _collisionDetector = new CollisionDetector();
@@ -26,7 +26,20 @@ public class Game (Map map, Climber climber, IRenderer render)
                     _gameObjects.RemoveAt(i);
                 }
             }
+
+            spawner.Update(this);
             climber.UpdatePhysics(map);
+            climber.UpdateEffects();
+
+            if(climber.IsDead()){
+                Console.Clear();
+                System.Console.WriteLine("You dead boi! Press any key to exit");
+                _isRunning = false;
+                Console.ReadLine();
+                return;
+            }
+
+            System.Console.WriteLine(climber.GetHP());           
             render.DrawMap(map);
             for (int i = 0; i < _gameObjects.Count; i++)
             {

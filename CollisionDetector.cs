@@ -9,17 +9,4 @@ public class CollisionDetector
         }
         return false;
     }
-    
    }
-    
-    
-    
-    
-   /*private void HandleCollision(IGameObject obj)
-    {
-        if (obj.Position.X == climber.Position.X && obj.Position.Y == climber.Position.Y)
-        {
-            obj.onCollide(climber);
-            gameObjects.Remove(obj);
-        }
-    }*/
