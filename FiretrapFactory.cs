@@ -1,10 +1,10 @@
 public class FiretrapFactory(
     char _symbol, 
-    ICollisionBehavior _collisionBehavior) : IGameObjectFactory
+    Func<ICollisionBehavior> createCollisionBehavior) : IGameObjectFactory
 {
 
     public void Create(Game game)
     {
-        game.AddGameObject(new Firetrap(_symbol, new Position(40, 20), _collisionBehavior));
+        game.AddGameObject(new Firetrap(_symbol, new Position(40, 20), createCollisionBehavior()));
     }
 }
