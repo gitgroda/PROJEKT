@@ -10,7 +10,7 @@ public class Climber
     private PoisonEffect _poisonStatus = new PoisonEffect();
     private bool _isJumping;
     private int _jumpTicksLeft;
-    public void TakeDamage() => _hp -= 1;
+    public void TakeDamage() => _hp -= 3;
   
 
     public Climber(int hp)
@@ -41,6 +41,7 @@ public class Climber
         }
     }
 
+    public int GetHP() => _hp;
     public void TryMove(int deltaX, Map map) 
     {
         Position newPos = new Position(_position.X + deltaX, _position.Y);
@@ -77,6 +78,8 @@ public class Climber
     }
     public void UpdatePhysics(Map map)
     {
+        
+
         _physicsFrameCounter++;
         if (_physicsFrameCounter < 2) return;
         _physicsFrameCounter = 0;
@@ -117,7 +120,11 @@ public class Climber
     {
         return new Position(_position.X, _position.Y - 1);
     }
+    public void UpdateEffects()
+    {
+        if (_poisonStatus.ShouldDamage()) _hp -=2;
+    }
+    public bool IsDead() => _hp <= 0;
     public void ApplyPoison() => _poisonStatus.Apply();
-    public void UpdatePoison() => _poisonStatus.Update(_hp);
-    public void ApplyHeal() => _hp =+ 1;
+    public void ApplyHeal() => _hp += 3;
 }

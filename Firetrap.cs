@@ -13,7 +13,7 @@ public class Firetrap : IGameObject
     {
         
     }
-    public void onCollide(Climber climber)
+    public void OnCollide(Climber climber)
     {
         _collisionBehavior.Collide(climber);
     }

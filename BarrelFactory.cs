@@ -1,5 +1,6 @@
 public class BarrelFactory(char symbol,
-     IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior) : IGameObjectFactory
+     IMoveBehavior moveBehavior, 
+     ICollisionBehavior collisionBehavior) : IGameObjectFactory
 {
    
     public void Create(Game game)
