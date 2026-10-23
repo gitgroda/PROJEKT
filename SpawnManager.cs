@@ -14,22 +14,21 @@ public class SpawnManager()
     {
         _barrelTicks++;
         _trapTicks++;
-        
-        if (_barrelTicks == 10)
+
+        if (_barrelTicks == 60)
         {
             _poisonFactory.Create(game);
         }
-        else if (_barrelTicks >= 70)
+        else if (_barrelTicks >= 120)
         {
             _bouncyFactory.Create(game);
             _barrelTicks = 0;
         }
-
-        if (_trapTicks == 10)
+        if (_trapTicks == 120)
         {
             _firetrapFactory.Create(game);
         }
-        else if (_trapTicks == 160)
+        else if (_trapTicks == 240)
         {
             _firetrapFactory.Create(game);
             _trapTicks = 0;

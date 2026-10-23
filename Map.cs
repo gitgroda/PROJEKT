@@ -7,18 +7,15 @@ public class Map
     private Grid _grid;
     private int _width;
     private int _height;
-
     public Map()
     {
         _width = 80;
         _height = 24;
         _grid = new Grid(_width, _height);
         _grid.Buildlevel();
-       
     }
     public int GetWidth() => _width;
     public int GetHeight() => _height;
-
     public char GetTile(Position pos) => _grid.GetTile(pos);
     public void SetTile(Position pos, char tile) => _grid.SetTile(pos, tile);
     public bool OutOfBounds(Position pos) => pos.X < 0 || pos.X >= GetWidth() || pos.Y < 0 || pos.Y >= GetHeight();
