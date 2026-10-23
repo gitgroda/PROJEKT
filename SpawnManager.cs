@@ -1,24 +1,38 @@
 public class SpawnManager()
 {
-    private int _ticks = 0;
+    private int _barrelTicks = 0;
+    private int _trapTicks = 0;
+
     private IGameObjectFactory _bouncyFactory = new BarrelFactory('@', new BouncingBehavior(), new NormalCollide());
     private IGameObjectFactory _poisonFactory = new BarrelFactory('@', new RollingBehavior(), new PoisonCollide());
+    private IGameObjectFactory _normalFactory = new BarrelFactory('@', new RollingBehavior(), new NormalCollide());
+
     private IGameObjectFactory _potionFactory = new PotionFactory('P', new HealCollide());
     private IGameObjectFactory _firetrapFactory = new FiretrapFactory('F', new NormalCollide());
 
     public void Update(Game game)
     {
-        _ticks++;
-
-        _firetrapFactory.Create(game);
-        if (_ticks == 10)
+        _barrelTicks++;
+        _trapTicks++;
+        
+        if (_barrelTicks == 10)
         {
             _poisonFactory.Create(game);
         }
-        else if (_ticks == 60)
+        else if (_barrelTicks >= 70)
         {
             _bouncyFactory.Create(game);
-            _ticks = 0;
+            _barrelTicks = 0;
+        }
+
+        if (_trapTicks == 10)
+        {
+            _firetrapFactory.Create(game);
+        }
+        else if (_trapTicks == 160)
+        {
+            _firetrapFactory.Create(game);
+            _trapTicks = 0;
         }
     }
 
