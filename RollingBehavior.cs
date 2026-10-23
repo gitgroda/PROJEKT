@@ -1,6 +1,6 @@
 public class RollingBehavior : IMoveBehavior
 {
-    private int _direction = 1; // 1 = höger, -1 = vänster
+    private int _direction = -1; // 1 = höger, -1 = vänster
     private bool _wasFalling = false;
     public Position Move(Position currentPosition, Map map)
     {

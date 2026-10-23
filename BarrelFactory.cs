@@ -5,6 +5,6 @@ public class BarrelFactory(char symbol,
     public void Create(Game game)
     {
         // Vi anropar delegaterna för att skapa NYA instanser för varje tunna
-        game.AddGameObject(new Barrel(symbol, new Position(15, 1), createMoveBehavior(), createCollisionBehavior()));
+        game.AddGameObject(new Barrel(symbol, new Position(70, 2), createMoveBehavior(), createCollisionBehavior()));
     }
 }
