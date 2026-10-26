@@ -7,11 +7,13 @@ List<MenuItem<int>> difficultyItems = new List<MenuItem<int>>
     new MenuItem<int>("Normal (6 HP)", 6),
     new MenuItem<int>("Svår (3 HP)", 3)
 };
+
 Menu<int> difficultyMenu = new Menu<int>("VÄLJ SVÅRIGHETSGRAD", difficultyItems);
 int startingHp = difficultyMenu.Show();
 Map map = new Map();
 Climber climber = new Climber(startingHp);
 IRenderer render = new ConsoleRenderer();
+
 IGameObjectFactory bouncyFactory = new BarrelFactory('@',() => new BouncingBehavior(), () => new NormalCollide());
 IGameObjectFactory poisonFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new PoisonCollide());
 IGameObjectFactory normalFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new NormalCollide());
@@ -32,6 +34,9 @@ Game game = new Game(
     render, 
     spawner
 );
+
+game.AddGameObject(new Trophy('T', new Position(79, 4), new WinCollide()));
+
 List<MenuItem<Action>> menuItems = new List<MenuItem<Action>>
 {
     new MenuItem<Action>("Starta spelet", () => game.Run()),
