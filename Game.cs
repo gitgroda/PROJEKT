@@ -21,7 +21,7 @@ public class Game (Map map, Climber climber, IRenderer render, SpawnManager spaw
                 var obj = _gameObjects[i];
                 obj.Update(map);
                 
-                if (_collisionDetector.CheckCollsion(obj, climber))
+                if (_collisionDetector.CheckCollsion(obj, climber) || _collisionDetector.CheckOutOfBounds(obj, map))
                 {
                     _gameObjects.RemoveAt(i);
                 }

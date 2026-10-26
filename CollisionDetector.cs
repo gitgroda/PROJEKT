@@ -9,4 +9,5 @@ public class CollisionDetector
         }
         return false;
     }
-   }
+    public bool CheckOutOfBounds(IGameObject obj, Map map) => obj.OutOfBounds(map);
+    }

@@ -3,9 +3,9 @@ public class ConsoleRenderer : IRenderer
     public void DrawMap(Map map)
     {
         Console.SetCursorPosition(0, 0);
-        for (int y = 0; y < map.GetHeight(); y++)
+        for (int y = 0; y < map.Height; y++)
         {
-            for (int x = 0; x < map.GetWidth(); x++)
+            for (int x = 0; x < map.Width; x++)
             {
                 Console.Write(map.GetTile(new Position(x, y)));
             }

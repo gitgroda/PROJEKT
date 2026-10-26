@@ -7,3 +7,9 @@
 - Behöver vi göra int x och y i class Position privata och sedan göra Getx() & GetY() för dem? 
 - Implementera kravet om Generics i Grid? 
 
+
+
+////////////////
+State pattern för Climber -> State -> GravityState  / GroundState
+
+Meny funktion - Factory metoder

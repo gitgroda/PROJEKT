@@ -8,4 +8,8 @@ public readonly record struct Position
         this.X = X;
         this.Y = Y;
     }
+
+    public Position GetBelow() => new Position(this.X, this.Y + 1);
+    public Position GetAbove() => new Position(this.X, this.Y + -1);
+
 }

@@ -18,10 +18,10 @@ public class BouncingBehavior : IMoveBehavior
         else
         {
             _bounceTicksLeft = 0; 
+            
             if (!map.HasGroundBelow(new Position(x, y))) y++; 
             else _bounceTicksLeft = _maxBounceHeight; 
         }
-        Thread.Sleep(16);
         return new Position(x, y);
     }
     

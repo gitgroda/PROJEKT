@@ -4,5 +4,6 @@ public interface IGameObject
     void OnCollide(Climber climber);
     void Draw(IRenderer renderer);
 	bool IsAt(Position position);
+    bool OutOfBounds(Map map);
 }
 	

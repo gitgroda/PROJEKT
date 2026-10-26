@@ -51,75 +51,52 @@ public class Climber
            MoveTo(newPos);
         }
     }
-       public void TryJump(Map map)
+    public void TryJump(Map map)
     {
         if (!_isJumping && map.HasGroundBelow(_position))
         {
-            StartJump(6);
+            _isJumping = true;
+            _jumpTicksLeft = 6;
         }
-    }
-    public void StartJump(int ticks)
-    {
-        _isJumping = true;
-        _jumpTicksLeft = ticks;
-    }
-    public void DuringJump()
-    {
-        _jumpTicksLeft--;
-        if (_jumpTicksLeft <= 0)
-        {
-            _isJumping = false;
-        }
-    }
-    public void CancelJump()
-    {
-        _isJumping = false;
-        _jumpTicksLeft = 0;
     }
     public void UpdatePhysics(Map map)
     {
-        
-
         _physicsFrameCounter++;
         if (_physicsFrameCounter < 2) return;
         _physicsFrameCounter = 0;
 
         if (map.IsLadder(_position))
         {
-            CancelJump();
+            _isJumping = false;
+            _jumpTicksLeft = 0;
             return;
         }
         if (_isJumping)
         {
-            if (map.IsWalkable(GetAbovePos()) && !map.IsLadder(GetAbovePos()))
+            if (map.IsWalkable(_position.GetAbove()) && !map.IsLadder(_position.GetAbove()))
             {
-                MoveTo(GetAbovePos());
-                DuringJump();
+                MoveTo(_position.GetAbove());
+                _jumpTicksLeft--;
+                if (_jumpTicksLeft <= 0)
+                {
+                    _isJumping = false;
+                }
             }
             else
             {
-                CancelJump();
+                _isJumping = false;
+                _jumpTicksLeft = 0;
             }
             return;
         }
         if (!map.HasGroundBelow(_position))      //om climber faller 
         {
-            if (map.IsWalkable(GetBelowPos()))
+            if (map.IsWalkable(_position.GetBelow()))
             {
-                MoveTo(GetBelowPos()); 
+                _position = _position.GetBelow(); 
             }
         }
     } 
-
-    //Vi måste ändra dessa privata metoder senare
-    private Position GetBelowPos()
-    {
-        return new Position(_position.X, _position.Y + 1);
-    }
-    private Position GetAbovePos()
-    {
-        return new Position(_position.X, _position.Y - 1);
-    }
     public void UpdateEffects()
     {
         if (_poisonStatus.ShouldDamage()) _hp -=2;

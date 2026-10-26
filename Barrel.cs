@@ -23,7 +23,11 @@ public class Barrel : IGameObject
         renderer.DrawSprite(_position, _symbol, _collisionBehavior.GetEffectColor());
     }
     public bool IsAt(Position position)
-{
-    return _position == position; 
-}
+    {
+        return _position == position; 
+    }
+    public bool OutOfBounds(Map map)
+    {
+        return map.OutOfBounds(_position);
+    }
 }

@@ -2,9 +2,10 @@
 // VAD är det för koncept ni påstår att ni använder?
 // Delegater och beroendeinjektion
 // HUR använder ni konceptet?
-// Jag injicerar delegater (t.ex. Func<IMoveBehavior> och Func<ICollisionBehavior>) i mina fabriker (BarrelFactory, PotionFactory, FiretrapFactory) via SpawnManager.
+// Vi injicerar delegater (t.ex. Func<IMoveBehavior> och Func<ICollisionBehavior>) i fabrikererna (BarrelFactory, PotionFactory, FiretrapFactory) via SpawnManager.
 // VARFÖR använder ni konceptet?
-// För att förhindra delat tillstånd (shared state) mellan spelobjekt. Genom att skicka in skapande-logik via delegater kan fabrikerna generera en helt ny, oberoende instans av beteendena för varje specifikt objekt de skapar, istället för att alla objekt refererar till samma minnesadress.
+// För att förhindra shared state mellan spelobjekt. Genom att skicka in skapande-logik via delegater kan fabrikerna generera en helt ny, 
+// oberoende instans av beteendena för varje specifikt objekt de skapar, istället för att alla objekt refererar till samma minnesreferens.
 public class SpawnManager()
 {
     private int _barrelTicks = 0;
