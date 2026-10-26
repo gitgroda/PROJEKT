@@ -21,7 +21,7 @@ public class Game (Map map, Climber climber, IRenderer render, SpawnManager spaw
                 var obj = _gameObjects[i];
                 obj.Update(map);
                 
-                if (_collisionDetector.CheckCollsion(obj, climber) )
+                if (_collisionDetector.CheckCollsion(obj, climber) || obj.IsOutOfBounds(map))
                 {
                     _gameObjects.RemoveAt(i);
                 }
@@ -29,14 +29,18 @@ public class Game (Map map, Climber climber, IRenderer render, SpawnManager spaw
             spawner.Update(this);
             climber.UpdatePhysics(map);
             climber.UpdateEffects();
-            if(climber.IsDead()){
+
+            if(climber.IsDead())
+            {
                 Console.Clear();
                 System.Console.WriteLine("You dead boi! Press any key to exit");
                 _isRunning = false;
                 Console.ReadLine();
                 return;
             }
-            if(climber.Win()){
+
+            if(climber.Win())
+            {
                 Console.Clear();
                 System.Console.WriteLine("You won! Press any key to exit");
                 _isRunning = false;

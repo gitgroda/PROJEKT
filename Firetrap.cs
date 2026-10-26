@@ -27,5 +27,9 @@ public class Firetrap : IGameObject
     {
         return _position == position;
     }
+    public bool IsOutOfBounds(Map map)
+    {
+        return map.IsOutOfBounds(_position);
+    }
 
 }

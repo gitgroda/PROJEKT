@@ -6,6 +6,9 @@ public class Map
 {
     private Grid<char> _tiles;
     private Grid<bool> _solidGrid;
+    private Grid<bool> _ladderGrid;
+
+    
     public int Width { get; }
     public int Height { get; }
     private readonly int floorChar = '=';
@@ -13,12 +16,13 @@ public class Map
     public Map()
     {
         Width = 80;
-        Height = 24;
+        Height = 26;
         _tiles = new Grid<char>(Width, Height, ' ');
         _solidGrid = new Grid<bool>(Width, Height, false);
+        _ladderGrid = new Grid<bool>(Width, Height, false);
         BuildLevel();
     }
-    public char GetTile(Position pos) => _tiles.Get(pos, '=');
+    public char GetTile(Position pos) => _tiles.Get(pos, 'x');
     public void SetSolidTile(Position pos, char tile)
     {
         _tiles.Set(pos, tile);
@@ -27,7 +31,8 @@ public class Map
     public void SetLadderTile(Position pos)
     {
         _tiles.Set(pos, 'H');
-        _solidGrid.Set(pos, false);
+        _solidGrid.Set(pos, false); //borde kunna tas
+        _ladderGrid.Set(pos, true);
     }
     public void BuildFloor(int floor)
     {
@@ -59,10 +64,7 @@ public class Map
             }
         }
     }
-    public int GetWidth() => Width;
-    public int GetHeight() => Height;
     public bool IsOutOfBounds(Position pos) => _tiles.IsOutOfBounds(pos);
-
     public bool IsWalkable(Position pos)
     {
         if (IsOutOfBounds(pos)) return false;
@@ -74,14 +76,16 @@ public class Map
         if (IsOutOfBounds(pos)) return false;
 
         Position below = new Position(pos.X, pos.Y + 1);
-        return GetTile(pos) == 'H' || GetTile(below) == 'H';
-    }
 
+        return _ladderGrid.Get(pos, false) || _ladderGrid.Get(below, false);
+
+    }
     public bool HasGroundBelow(Position pos)
     {
         Position below = new Position(pos.X, pos.Y + 1);
 
         if (IsOutOfBounds(below)) return false;
-        return _solidGrid.Get(below, false) || GetTile(below) == 'H';
+        
+        return _solidGrid.Get(below, false) || _ladderGrid.Get(below, false);
     }
 }
