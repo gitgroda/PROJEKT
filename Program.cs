@@ -14,11 +14,32 @@ Map map = new Map();
 Climber climber = new Climber(startingHp);
 IRenderer render = new ConsoleRenderer();
 
-IGameObjectFactory bouncyFactory = new BarrelFactory('@',() => new BouncingBehavior(), () => new NormalCollide());
-IGameObjectFactory poisonFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new PoisonCollide());
-IGameObjectFactory normalFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new NormalCollide());
-IGameObjectFactory potionFactory = new PotionFactory('P', () => new HealCollide());
-IGameObjectFactory firetrapFactory = new FiretrapFactory('F', () => new NormalCollide());
+List<Position> barrelSpawns = new List<Position>
+{
+    new Position(70, 4)
+};
+
+List<Position> potionSpawns = new List<Position>
+{
+    new Position(10, 9),
+    new Position(70, 14),
+    new Position(10, 19),
+    new Position(70, 24),
+};
+
+List<Position> firetrapSpawns = new List<Position>
+{
+    new Position(15, 1),
+    new Position(65, 6),
+    new Position(15, 11),
+    new Position(65, 16),
+};
+
+GameObjectFactory bouncyFactory = new BarrelFactory(barrelSpawns, '@', () => new BouncingBehavior(), () => new NormalCollide());
+GameObjectFactory poisonFactory = new BarrelFactory(barrelSpawns, '@', () => new RollingBehavior(), () => new PoisonCollide());
+GameObjectFactory normalFactory = new BarrelFactory(barrelSpawns, '@', () => new RollingBehavior(), () => new NormalCollide());
+GameObjectFactory potionFactory = new PotionFactory(potionSpawns, 'P', () => new HealCollide());
+GameObjectFactory firetrapFactory = new FiretrapFactory(firetrapSpawns, 'F', () => new NormalCollide());
 
 SpawnManager spawner = new SpawnManager(
     bouncyFactory, 

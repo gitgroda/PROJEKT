@@ -1,10 +1,22 @@
-public class FiretrapFactory(
-    char _symbol, 
-    Func<ICollisionBehavior> createCollisionBehavior) : IGameObjectFactory
-{
-
-    public void Create(Game game)
+public class FiretrapFactory : GameObjectFactory
+{   
+    private readonly char _symbol;
+    private readonly Func<ICollisionBehavior> _collisionBehaviorFactory;
+    public FiretrapFactory (IReadOnlyList<Position> spawnLocations, char symbol, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
     {
-        game.AddGameObject(new Firetrap(_symbol, new Position(40, 22), createCollisionBehavior()));  //Y kan vara 22 - (x * 5) //X kan vara mellan 20-60
+        _symbol = symbol;
+        _collisionBehaviorFactory = collisionBehaviorFactory;
+    }
+    public override IGameObject Create()
+    {
+        Position pos = SelectSpawn();
+
+        return new Firetrap(
+            _symbol, 
+            pos, 
+            _collisionBehaviorFactory()
+            
+            );
+
     }
 }

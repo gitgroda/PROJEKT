@@ -1,9 +1,22 @@
-public class PotionFactory(char symbol,
-      Func<ICollisionBehavior> createCollisionBehavior) : IGameObjectFactory
-{
-    public void Create(Game game)
+public class PotionFactory : GameObjectFactory
+{   
+    private readonly char _symbol;
+    private readonly Func<ICollisionBehavior> _collisionBehaviorFactory;
+    public PotionFactory (IReadOnlyList<Position> spawnLocations, char symbol, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
     {
-        game.AddGameObject(new Potion(symbol, new Position(73, 7), createCollisionBehavior()));
+        _symbol = symbol;
+        _collisionBehaviorFactory = collisionBehaviorFactory;
+    }
+    public override IGameObject Create()
+    {
+        Position pos = SelectSpawn();
+
+        return new Potion(
+            _symbol, 
+            pos, 
+            _collisionBehaviorFactory()
+            
+            );
 
     }
 }

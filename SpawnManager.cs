@@ -1,29 +1,22 @@
-// FALL #4:
-// VAD är det för koncept ni påstår att ni använder?
-// Delegater och beroendeinjektion
-// HUR använder ni konceptet?
-// Vi injicerar delegater (t.ex. Func<IMoveBehavior> och Func<ICollisionBehavior>) i fabrikererna (BarrelFactory, PotionFactory, FiretrapFactory) via SpawnManager.
-// VARFÖR använder ni konceptet?
-// För att förhindra shared state mellan spelobjekt. Genom att skicka in skapande-logik via delegater kan fabrikerna generera en helt ny, 
-// oberoende instans av beteendena för varje specifikt objekt de skapar, istället för att alla objekt refererar till samma minnesreferens.
+
 public class SpawnManager
 {
     private int _barrelTicks = 0;
     private int _trapTicks = 0;
 
-    private IGameObjectFactory _bouncyFactory;
-    private IGameObjectFactory _poisonFactory;
-    private IGameObjectFactory _normalFactory;
-    private IGameObjectFactory _potionFactory;
-    private IGameObjectFactory _firetrapFactory;
+    private GameObjectFactory _bouncyFactory;
+    private GameObjectFactory _poisonFactory;
+    private GameObjectFactory _normalFactory;
+    private GameObjectFactory _potionFactory;
+    private GameObjectFactory _firetrapFactory;
 
     // Injicera fabrikerna via konstruktorn för att uppfylla Factory-kravet!
     public SpawnManager(
-        IGameObjectFactory bouncyFactory,
-        IGameObjectFactory poisonFactory,
-        IGameObjectFactory normalFactory,
-        IGameObjectFactory potionFactory,
-        IGameObjectFactory firetrapFactory)
+        GameObjectFactory bouncyFactory,
+        GameObjectFactory poisonFactory,
+        GameObjectFactory normalFactory,
+        GameObjectFactory potionFactory,
+        GameObjectFactory firetrapFactory)
     {
         _bouncyFactory = bouncyFactory;
         _poisonFactory = poisonFactory;
@@ -38,20 +31,23 @@ public class SpawnManager
 
         if (_barrelTicks == 60)
         {
-            _poisonFactory.Create(game);
+            game.AddGameObject(_poisonFactory.Create());
         }
         else if (_barrelTicks >= 120)
         {
-            _bouncyFactory.Create(game);
-            _barrelTicks = 0;
+             game.AddGameObject(_bouncyFactory.Create());
+             _barrelTicks = 0;
         }
+    
         if (_trapTicks == 120)
         {
-            _firetrapFactory.Create(game);
+             game.AddGameObject(_firetrapFactory.Create());
+             game.AddGameObject(_potionFactory.Create());
         }
         else if (_trapTicks == 240)
         {
-            _firetrapFactory.Create(game);
+             game.AddGameObject(_firetrapFactory.Create());
+             game.AddGameObject(_potionFactory.Create());
             _trapTicks = 0;
         }
     }
