@@ -8,6 +8,12 @@ public class LadderState : ClimberState
         {
             climber.MoveTo(target);
         }
+        // Låt climber kliva av stegen uppåt om marken är ledig
+    else if (deltaY == -1 && map.IsWalkable(target))
+    {
+        climber.MoveTo(target);
+        climber.SetState(new GroundState());
+    }
     }
 
     public override void HandleMove(Climber climber, int deltaX, Map map)

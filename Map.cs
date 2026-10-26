@@ -74,10 +74,7 @@ public class Map
     public bool IsLadder(Position pos)
     {
         if (IsOutOfBounds(pos)) return false;
-
-        Position below = new Position(pos.X, pos.Y + 1);
-
-        return _ladderGrid.Get(pos, false) || _ladderGrid.Get(below, false);
+        return _ladderGrid.Get(pos, false);
 
     }
     public bool HasGroundBelow(Position pos)
