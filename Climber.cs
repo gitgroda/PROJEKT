@@ -7,6 +7,7 @@ public class Climber
     private int _hp;
     private char _symbol = '@';
     private PoisonEffect _poisonStatus = new PoisonEffect();
+    private bool _isWinning = false;
     private IClimberState _state;
 
     public Climber(int hp)
@@ -19,6 +20,8 @@ public class Climber
     public void TakeDamage() => _hp -= 3;
     public int GetHP() => _hp;
     public bool IsDead() => _hp <= 0;
+    public bool Winning() => _isWinning = true;
+    public bool Win() => _isWinning;
     public void ApplyPoison() => _poisonStatus.Apply();
     public void ApplyHeal() => _hp += 3;
 
@@ -67,4 +70,5 @@ public class Climber
             _hp -= 2;
         }
     }
+    
 }

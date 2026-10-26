@@ -26,14 +26,19 @@ public class Game (Map map, Climber climber, IRenderer render, SpawnManager spaw
                     _gameObjects.RemoveAt(i);
                 }
             }
-
             spawner.Update(this);
             climber.UpdatePhysics(map);
             climber.UpdateEffects();
-
             if(climber.IsDead()){
                 Console.Clear();
                 System.Console.WriteLine("You dead boi! Press any key to exit");
+                _isRunning = false;
+                Console.ReadLine();
+                return;
+            }
+            if(climber.Win()){
+                Console.Clear();
+                System.Console.WriteLine("You won! Press any key to exit");
                 _isRunning = false;
                 Console.ReadLine();
                 return;
