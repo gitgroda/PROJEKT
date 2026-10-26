@@ -4,33 +4,84 @@ using System.Security.Principal;
 
 public class Map
 {
-    private Grid _grid;
+    private Grid<char> _tiles;
+    private Grid<bool> _solidGrid;
     public int Width { get; }
     public int Height { get; }
+    private readonly int floorChar = '=';
+    private readonly int ladderChar = 'H';
     public Map()
     {
         Width = 80;
         Height = 24;
-        _grid = new Grid(Width, Height);
-        _grid.Buildlevel();
+        _tiles = new Grid<char>(Width, Height, ' ');
+        _solidGrid = new Grid<bool>(Width, Height, false);
+        BuildLevel();
     }
-   
-    public char GetTile(Position pos) => _grid.GetTile(pos);
-    public void SetTile(Position pos, char tile) => _grid.SetTile(pos, tile);
-    public bool OutOfBounds(Position pos) => pos.X < 0 || pos.X >= Width || pos.Y < 0 || pos.Y >= Height;
-    public bool IsWalkable(Position pos) => !OutOfBounds(pos) && (_grid.GetTile(pos) != 'x');
+    public char GetTile(Position pos) => _tiles.Get(pos, '=');
+    public void SetSolidTile(Position pos, char tile)
+    {
+        _tiles.Set(pos, tile);
+        _solidGrid.Set(pos, true);
+    }
+    public void SetLadderTile(Position pos)
+    {
+        _tiles.Set(pos, 'H');
+        _solidGrid.Set(pos, false);
+    }
+    public void BuildFloor(int floor)
+    {
+        int floorY = Height - 1 - (floor * 5);
+        for (int x = 0; x < Width; x++)
+        {
+            if (floor % 2 == 0 && floor != 0 && x < 4) continue;
+            if (floor % 2 != 0 && x > Width - 5) continue;
+            SetSolidTile(new Position(x, floorY), 'x');
+        }
+    }
+    public void BuildLadder(int floor)
+    {
+        int floorY = Height - 1 - (floor * 5);
+        int ladderX = (floor % 2 == 0) ? 5 : Width - 6;
+        for (int y = floorY; y < floorY + 5; y++)
+        {
+            SetLadderTile(new Position(ladderX, y));
+        }
+    }
+    public void BuildLevel()
+    {
+        for (int floor = 0; floor < 5; floor++)
+        {
+            BuildFloor(floor);
+            if (floor > 0)
+            {
+                BuildLadder(floor);
+            }
+        }
+    }
+    public int GetWidth() => Width;
+    public int GetHeight() => Height;
+    public bool IsOutOfBounds(Position pos) => _tiles.IsOutOfBounds(pos);
+
+    public bool IsWalkable(Position pos)
+    {
+        if (IsOutOfBounds(pos)) return false;
+        return !_solidGrid.Get(pos, true);
+    }
+
     public bool IsLadder(Position pos)
     {
-        if (OutOfBounds(pos)) return false;
+        if (IsOutOfBounds(pos)) return false;
 
-        return _grid.GetTile(pos) == 'H' || _grid.GetTile(new Position(pos.X, pos.Y + 1)) == 'H'; 
+        Position below = new Position(pos.X, pos.Y + 1);
+        return GetTile(pos) == 'H' || GetTile(below) == 'H';
     }
+
     public bool HasGroundBelow(Position pos)
     {
-        Position _belowPos = new Position(pos.X, pos.Y + 1); //kollar positionen med Y + 1
+        Position below = new Position(pos.X, pos.Y + 1);
 
-        if (OutOfBounds(_belowPos)) return false;
-
-        return _grid.GetTile(_belowPos) == 'x' || _grid.GetTile(_belowPos) == 'H' ; 
+        if (IsOutOfBounds(below)) return false;
+        return _solidGrid.Get(below, false) || GetTile(below) == 'H';
     }
 }

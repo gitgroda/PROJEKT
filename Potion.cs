@@ -25,5 +25,4 @@ public class Potion : IGameObject
     {
         return _position == position; 
     }
-
 }
