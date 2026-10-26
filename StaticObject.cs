@@ -1,11 +1,11 @@
 using System.Runtime.Versioning;
 
-public class Potion : IGameObject
+public class StaticObject : IGameObject
 {
 	private char _symbol;
 	private Position _position;
 	private ICollisionBehavior _collisionBehavior;
-	public Potion(char symbol, Position position,
+	public StaticObject(char symbol, Position position,
       ICollisionBehavior collisionBehavior)
     {
         _symbol = symbol;

@@ -16,7 +16,7 @@ public class Map
     public Map()
     {
         Width = 80;
-        Height = 27;
+        Height = 26;
         _tiles = new Grid<char>(Width, Height, ' ');
         _solidGrid = new Grid<bool>(Width, Height, false);
         _ladderGrid = new Grid<bool>(Width, Height, false);

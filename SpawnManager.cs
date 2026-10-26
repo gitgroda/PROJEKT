@@ -6,21 +6,17 @@ public class SpawnManager
 
     private GameObjectFactory _bouncyFactory;
     private GameObjectFactory _poisonFactory;
-    private GameObjectFactory _normalFactory;
     private GameObjectFactory _potionFactory;
     private GameObjectFactory _firetrapFactory;
 
-    // Injicera fabrikerna via konstruktorn för att uppfylla Factory-kravet!
     public SpawnManager(
         GameObjectFactory bouncyFactory,
         GameObjectFactory poisonFactory,
-        GameObjectFactory normalFactory,
         GameObjectFactory potionFactory,
         GameObjectFactory firetrapFactory)
     {
         _bouncyFactory = bouncyFactory;
         _poisonFactory = poisonFactory;
-        _normalFactory = normalFactory;
         _potionFactory = potionFactory;
         _firetrapFactory = firetrapFactory;
     }

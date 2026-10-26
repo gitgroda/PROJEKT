@@ -2,19 +2,19 @@ using System;
 
 public class Climber
 {
-    private int _physicsFrameCounter = 0;
+    private IClimberPhysics _physics;
+    private PoisonEffect _poisonStatus = new PoisonEffect();
     private Position _position;
     private int _hp;
     private char _symbol = '@';
-    private PoisonEffect _poisonStatus = new PoisonEffect();
     private bool _isWinning = false;
-    private IClimberState _state;
+    private int _physicsFrameCounter = 0;
 
-    public Climber(int hp)
+    public Climber(int hp, IClimberPhysics physics)
     {
         _position = new Position(5, 22);
         _hp = hp;
-        _state = new GroundState();
+        _physics = physics;
     }
 
     public void TakeDamage() => _hp -= 3;
@@ -27,7 +27,7 @@ public class Climber
 
     public Position GetPosition() => _position;
     public void MoveTo(Position position) => _position = position;
-    public void SetState(IClimberState state) => _state = state;
+    public void SetPhysics(IClimberPhysics physics) => _physics = physics;
 
     public void Draw(IRenderer renderer)
     {
@@ -41,17 +41,17 @@ public class Climber
 
     public void TryClimb(int deltaY, Map map)
     {
-        _state.HandleClimb(this, deltaY, map);
+        _physics.Climb(this, deltaY, map);
     }
 
     public void TryMove(int deltaX, Map map)
     {
-        _state.HandleMove(this, deltaX, map);
+        _physics.Move(this, deltaX, map);
     }
 
     public void TryJump(Map map)
     {
-        _state.HandleJump(this, map);
+        _physics.Jump(this, map);
     }
 
     public void UpdatePhysics(Map map)
@@ -60,7 +60,7 @@ public class Climber
         if (_physicsFrameCounter < 2) return;
         _physicsFrameCounter = 0;
 
-        _state.Update(this, map);
+        _physics.Update(this, map);
     }
 
     public void UpdateEffects()

@@ -1,14 +1,11 @@
-public class Barrel : IGameObject
+public class Movable : IGameObject
 {
 
     private char _symbol;
     private IMoveBehavior _moveBehavior;
     private ICollisionBehavior _collisionBehavior;
-  
     private Position _position;
-    
-
-    public Barrel(char symbol, Position position,
+    public Movable(char symbol, Position position,
      IMoveBehavior moveBehavior, ICollisionBehavior collisionBehavior)
     {
         _symbol = symbol;

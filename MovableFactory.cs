@@ -1,9 +1,9 @@
-public class BarrelFactory : GameObjectFactory
+public class MovableFactory : GameObjectFactory
 {   
     private readonly char _symbol;
     private readonly Func<IMoveBehavior> _moveBehaviorFactory;
     private readonly Func<ICollisionBehavior> _collisionBehaviorFactory;
-    public BarrelFactory(IReadOnlyList<Position> spawnLocations, char symbol, Func<IMoveBehavior> moveBehaviorFactory, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
+    public MovableFactory(IReadOnlyList<Position> spawnLocations, char symbol, Func<IMoveBehavior> moveBehaviorFactory, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
     {
         _symbol = symbol;
         _moveBehaviorFactory = moveBehaviorFactory;
@@ -13,13 +13,12 @@ public class BarrelFactory : GameObjectFactory
     {
         Position pos = SelectSpawn();
 
-        return new Barrel(
+        return new Movable(
             _symbol, 
             pos, 
             _moveBehaviorFactory(), 
             _collisionBehaviorFactory()
             
             );
-
     }
 }

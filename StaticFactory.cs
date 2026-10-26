@@ -1,8 +1,8 @@
-public class PotionFactory : GameObjectFactory
+public class StaticFactory : GameObjectFactory
 {   
     private readonly char _symbol;
     private readonly Func<ICollisionBehavior> _collisionBehaviorFactory;
-    public PotionFactory (IReadOnlyList<Position> spawnLocations, char symbol, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
+    public StaticFactory (IReadOnlyList<Position> spawnLocations, char symbol, Func<ICollisionBehavior> collisionBehaviorFactory) : base(spawnLocations)
     {
         _symbol = symbol;
         _collisionBehaviorFactory = collisionBehaviorFactory;
@@ -11,7 +11,7 @@ public class PotionFactory : GameObjectFactory
     {
         Position pos = SelectSpawn();
 
-        return new Potion(
+        return new StaticObject(
             _symbol, 
             pos, 
             _collisionBehaviorFactory()
