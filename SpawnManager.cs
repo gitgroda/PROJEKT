@@ -6,18 +6,31 @@
 // VARFÖR använder ni konceptet?
 // För att förhindra shared state mellan spelobjekt. Genom att skicka in skapande-logik via delegater kan fabrikerna generera en helt ny, 
 // oberoende instans av beteendena för varje specifikt objekt de skapar, istället för att alla objekt refererar till samma minnesreferens.
-public class SpawnManager()
+public class SpawnManager
 {
     private int _barrelTicks = 0;
     private int _trapTicks = 0;
 
-    private IGameObjectFactory _bouncyFactory = new BarrelFactory('@',() => new BouncingBehavior(), () => new NormalCollide());
-    private IGameObjectFactory _poisonFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new PoisonCollide());
-    private IGameObjectFactory _normalFactory = new BarrelFactory('@', () => new RollingBehavior(), () => new NormalCollide());
+    private IGameObjectFactory _bouncyFactory;
+    private IGameObjectFactory _poisonFactory;
+    private IGameObjectFactory _normalFactory;
+    private IGameObjectFactory _potionFactory;
+    private IGameObjectFactory _firetrapFactory;
 
-    private IGameObjectFactory _potionFactory = new PotionFactory('P', () => new HealCollide());
-    private IGameObjectFactory _firetrapFactory = new FiretrapFactory('F', () => new NormalCollide());
-
+    // Injicera fabrikerna via konstruktorn för att uppfylla Factory-kravet!
+    public SpawnManager(
+        IGameObjectFactory bouncyFactory,
+        IGameObjectFactory poisonFactory,
+        IGameObjectFactory normalFactory,
+        IGameObjectFactory potionFactory,
+        IGameObjectFactory firetrapFactory)
+    {
+        _bouncyFactory = bouncyFactory;
+        _poisonFactory = poisonFactory;
+        _normalFactory = normalFactory;
+        _potionFactory = potionFactory;
+        _firetrapFactory = firetrapFactory;
+    }
     public void Update(Game game)
     {
         _barrelTicks++;
