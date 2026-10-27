@@ -1,13 +1,12 @@
-// FALL #4:
+// FALL #4: GameObjectFactory
 // VAD är det för koncept ni påstår att ni använder?
 // Factory Method Pattern
 // HUR använder ni konceptet?
-// Vi skapar factories som skapar våra GameObjects, så som barrels, potions och firetraps. Två subtyper Movable och Static. Genom Create() och SelectSpawn(),
-// hanterar subtyperna skapandet och retur av nya objekt. Injiceras i SpawnManager från Program.cs
+// Vi använder separata fabriker för att hantera instansieringen av spelets olika typer objekt.
+// DVS t.ex. tunnor med olika beteenden, firetraps och potions. Vi använder då fabriker för att detta inte ska ske direkt i spellogiken.
 // VARFÖR använder ni konceptet?
-// Frikopplar spawnmanager från detaljer om hur objekt skapas och placeras, endast när.
-// Fabrikerna ansvarar för hur och var objekten skapas. Minskar coupling och gör det enkelt att 
-// lägga till nya objekt
+// För att minska kopplingen mellan spellogiken och de konkreta klasserna.
+// Detta gör också det möjligt att instansiera nya objekt under runtime, t.ex. skapa nya tunnor som rullar.
 
 public abstract class GameObjectFactory
 {

@@ -83,7 +83,7 @@ Game game = new Game(
 
 game.AddGameObject(new Trophy('T', new Position(79, 4), new WinCollide()));
 
-// FALL #8:
+// FALL #8: Program.cs
 // VAD är det för koncept ni påstår att ni använder?
 // Delegater och beroendeinjektion
 // HUR använder ni konceptet?
