@@ -8,6 +8,7 @@
 // Frikopplar spawnmanager från detaljer om hur objekt skapas och placeras, endast när.
 // Fabrikerna ansvarar för hur och var objekten skapas. Minskar coupling och gör det enkelt att 
 // lägga till nya objekt
+
 public abstract class GameObjectFactory
 {
     private readonly IReadOnlyList<Position> _spawnLocations;

@@ -1,11 +1,11 @@
-// FALL #3:
+// FALL #3: IClimberPhysics
 // VAD är det för koncept ni påstår att ni använder?
 // Strategy Pattern
 // HUR använder ni konceptet?
-// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics, HeavyPhysics
-//
+// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics och HeavyPhysics och ger olika beteenden för olika spellägen
 // VARFÖR använder ni konceptet?
-//
+// För att sperarera gravitationsregler från spelarens tillstånd, eliminera conditionals. 
+// Vi kan nu byta gravitationsläge / spelläge dynamiskt i runtime och enkelt lägga till nya spellägen utan att ändra befintlig kod i Climber
 public interface IClimberPhysics
 {
     void Move(Climber climber, int deltaX, Map map);

@@ -1,14 +1,14 @@
 using System.IO.Compression;
 using System.Security.Cryptography.X509Certificates;
-// FALL #6:
-    // VAD är det för koncept ni påstår att ni använder?
-    // Generics
-    // HUR använder ni konceptet?
-    // Egen generisk typ Grid<T> som konstrueras med två olika typargument:
-    // Grid<char> för grafiska tecken och Grid<bool> för solida objekt samt stegar.
-    // VARFÖR använder ni konceptet?
-    // Återanvänder 2D-rutnätslogik, indexering och gränskontroller för olika
-    // datatyper utan kodduplikation eller typkonvertering.
+// FALL #6: Grid
+// VAD är det för koncept ni påstår att ni använder?
+// Generics
+// HUR använder ni konceptet?
+// Egen generisk typ Grid<T> som konstrueras med två olika typargument:
+// Grid<char> för grafiska tecken och Grid<bool> för solida objekt samt stegar.
+// VARFÖR använder ni konceptet?
+// Återanvänder 2D-rutnätslogik, indexering och gränskontroller för olika
+// datatyper utan kodduplikation eller typkonvertering.
 public class Grid<T>
 {
     private T[,] _tiles;
