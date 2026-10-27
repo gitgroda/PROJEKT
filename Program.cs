@@ -34,18 +34,18 @@ List<Position> barrelSpawns = new List<Position>
 
 List<Position> potionSpawns = new List<Position>
 {
-    new Position(10, 9),
-    new Position(70, 14),
-    new Position(10, 19),
     new Position(70, 24),
+    new Position(10, 19),
+    new Position(70, 14),
+    new Position(10, 9),
 };
 
 List<Position> firetrapSpawns = new List<Position>
 {
-    new Position(15, 1),
-    new Position(65, 6),
-    new Position(15, 11),
     new Position(65, 16),
+    new Position(15, 11),
+    new Position(65, 6),
+    new Position(15, 1),    
 };
 
 //FALL #7
