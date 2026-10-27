@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-// FALL #5:
+// FALL #5: Menu
 // VAD är det för koncept ni påstår att ni använder?
-// Generics (Generiska klasser)
+// Generics 
 // HUR använder ni konceptet?
 // Klasserna Menu<T> och MenuItem<T> använder en typ-parameter T som representerar den datatyp menyn ska returnera när spelaren gör ett val.
 // VARFÖR använder ni konceptet?
-// För att bygga ett återanvändbart och typsäkert menysystem. Eftersom T bevarar typinformationen hela vägen slipper anroparen casta värdet från en generell "object"-typ. Menyn kan användas för att returnera en Action för en huvudmeny, eller en Enum för att välja svårighetsgrad, med full kompilatorgaranti för rätt typ.
-
+// För att bygga ett återanvändbart och typsäkert menysystem. 
+// Menyn kan användas för att returnera en Action för en huvudmeny, eller en Enum för att välja svårighetsgrad. 
 public class Menu<T>
 {
     private readonly string _title;
