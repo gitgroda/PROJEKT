@@ -20,18 +20,20 @@
 // VAD är det för koncept ni påstår att ni använder?
 // Strategy Pattern
 // HUR använder ni konceptet?
-// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics
-//
+// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics och HeavyPhysics och ger olika beteenden för olika spellägen
 // VARFÖR använder ni konceptet?
-// 
+// För att sperarera gravitationsregler från spelarens tillstånd, eliminera conditionals. 
+// Vi kan nu byta gravitationsläge / spelläge dynamiskt i runtime och enkelt lägga till nya spellägen utan att ändra befintlig kod i Climber
 
 // FALL #4: GameObjectFactory
 // VAD är det för koncept ni påstår att ni använder?
 // Factory Method Pattern
 // HUR använder ni konceptet?
-// Vi skapar factories som skapar våra GameObjects, så som barrels, potions och firetraps. Två subtyper Movable och Static.
+// Vi använder separata fabriker för att hantera instansieringen av spelets olika typer objekt.
+// DVS t.ex. tunnor med olika beteenden, firetraps och potions. Vi använder då fabriker för att detta inte ska ske direkt i spellogiken.
 // VARFÖR använder ni konceptet?
-// 
+// För att minska kopplingen mellan spellogiken och de konkreta klasserna.
+// Detta gör också det möjligt att instansiera nya objekt under runtime, t.ex. skapa nya tunnor som rullar.
 
 // FALL #5: Menu
 // VAD är det för koncept ni påstår att ni använder?
