@@ -19,4 +19,12 @@ public class ConsoleRenderer : IRenderer
         Console.Write(symbol);
         Console.ResetColor();
     }
+    public void DrawText(Position position, string text)
+    {
+        ConsoleColor color = ConsoleColor.White;
+        Console.SetCursorPosition(position.X, position.Y);
+        Console.ForegroundColor = color;
+        Console.Write(text);
+        Console.ResetColor();
+    }
 }

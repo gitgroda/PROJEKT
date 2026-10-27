@@ -50,7 +50,7 @@
 // Återanvänder 2D-rutnätslogik, indexering och gränskontroller för olika
 // datatyper utan kodduplikation eller typkonvertering.
 
-//FALL #7
+//FALL #7 Program.cs
 // VAD är det för koncept ni påstår att ni använder?
 // Delegater och beroendeinjektion
 // HUR använder ni konceptet?
@@ -62,7 +62,7 @@
 // skapandelogik via delegater genererar fabrikerna helt nya, oberoende instanser av
 // beteendena för varje objekt, istället för att alla delar samma referens.
 
-// FALL #8:
+// FALL #8: Program.cs
 // VAD är det för koncept ni påstår att ni använder?
 // Delegater och beroendeinjektion
 // HUR använder ni konceptet?

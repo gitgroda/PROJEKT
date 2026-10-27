@@ -14,9 +14,6 @@ public class Grid<T>
     private T[,] _tiles;
     private int _width;
     private int _height;
-    private readonly char floorChar = '=';
-    private readonly char ladderChar = 'H';
-
     public Grid(int width, int height, T defaultValue) 
     {
         _width = width;
@@ -27,14 +24,13 @@ public class Grid<T>
             for (int x = 0; x < _width; x++)
             {
                 _tiles[x, y] = defaultValue; 
-            }   
+            }
         }
     }
     public bool IsOutOfBounds(Position pos)
     {
         return pos.X < 0 || pos.X >= _width || pos.Y < 0 || pos.Y >= _height;
     }
-
     public void Set(Position pos, T value)
     {
         if (!IsOutOfBounds(pos))

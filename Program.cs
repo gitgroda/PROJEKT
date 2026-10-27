@@ -4,7 +4,7 @@ Console.Clear();
 Console.CursorVisible = false;
 List<MenuItem<int>> difficultyItems = new List<MenuItem<int>>
 {
-    new MenuItem<int>("Easy (10 HP)", 10),
+    new MenuItem<int>("Easy (10 HP)", 9),
     new MenuItem<int>("Normal (6 HP)", 6),
     new MenuItem<int>("Hard (3 HP)", 3)
 };

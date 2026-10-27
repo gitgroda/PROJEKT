@@ -48,13 +48,14 @@ public class Game (Map map, Climber climber, IRenderer render, SpawnManager spaw
                 return;
             }
 
-            System.Console.WriteLine(climber.GetHP());           
             render.DrawMap(map);
+            render.DrawText(new Position(0, map.Height), "HP: " + climber.GetHP());
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 _gameObjects[i].Draw(render);
             }
             climber.Draw(render);
+            
         }
     }
     private void HandleInput()
