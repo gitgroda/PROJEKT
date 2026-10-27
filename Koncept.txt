@@ -11,7 +11,7 @@
 // VAD är det för koncept ni påstår att ni använder?
 // Strategy Pattern
 // HUR använder ni konceptet?
-// Gränssnittet ICollisionBehavior definierar kollisionslogik. Olika instanser (NormalCollide, PoisonCollide, HealCollide) injiceras i objekt som Static (potion, firetrap) och Movable (barrel) vid skapandet.
+// Gränssnittet ICollisionBehavior definierar kollisionslogik. Olika instanser (NormalCollide, PoisonCollide, HealCollide) injiceras i objekten Static (potion, firetrap) och Movable (barrel) vid skapandet.
 // VARFÖR använder ni konceptet?
 // För att dynamiskt variera hur objekt rör sig utan att bygga fast logiken i objektets klass. 
 // Det gör koden mer modulär, eliminerar subtyper av Movable och gör det enkelt att lägga till nya kollisionsmönster.
@@ -20,10 +20,10 @@
 // VAD är det för koncept ni påstår att ni använder?
 // Strategy Pattern
 // HUR använder ni konceptet?
-// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics
-//
+// IClimberPhysics implementeras av StandardPhysics, LowGravityPhysics och HeavyPhysics och ger olika beteenden för olika spellägen
 // VARFÖR använder ni konceptet?
-// 
+// För att sperarera gravitationsregler från spelarens tillstånd, eliminera conditionals. 
+// Vi kan nu byta gravitationsläge / spelläge dynamiskt i runtime och enkelt lägga till nya spellägen utan att ändra befintlig kod i Climber
 
 // FALL #4: GameObjectFactory
 // VAD är det för koncept ni påstår att ni använder?
