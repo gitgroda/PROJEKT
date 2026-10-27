@@ -1,6 +1,6 @@
 public class BouncingBehavior : IMoveBehavior
 {
-    private int _direction = -1; // 1 = höger, -1 = vänster
+    private int _direction = -1; 
     private int _bounceTicksLeft = 0;
     private int _maxBounceHeight = 1;
     public Position Move(Position currentPosition, Map map)

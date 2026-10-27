@@ -28,7 +28,6 @@ public class Menu<T>
             Console.Clear();
             Console.WriteLine($"=== {_title} ===");
             Console.WriteLine();
-    //går igenom listan för menyval och det val man är på blir grönt och får en pil framför sig.
             for (int i = 0; i < _items.Count; i++)
             {
                 if (i == _selectedIndex)
@@ -42,7 +41,6 @@ public class Menu<T>
                     Console.WriteLine($"  {_items[i].Text}");
                 }
             }
-    //blädda i menyvalen med tangenterna eller w och s
             ConsoleKey key = Console.ReadKey(intercept: true).Key;
 
             switch (key)

@@ -11,8 +11,8 @@ public class Map
     
     public int Width { get; }
     public int Height { get; }
-    private readonly int floorChar = '=';
-    private readonly int ladderChar = 'H';
+    private readonly char floorChar = '=';
+    private readonly char ladderChar = 'H';
     public Map()
     {
         Width = 80;
@@ -23,17 +23,6 @@ public class Map
         BuildLevel();
     }
     public char GetTile(Position pos) => _tiles.Get(pos, 'x');
-    public void SetSolidTile(Position pos, char tile)
-    {
-        _tiles.Set(pos, tile);
-        _solidGrid.Set(pos, true);
-    }
-    public void SetLadderTile(Position pos)
-    {
-        _tiles.Set(pos, 'H');
-        _solidGrid.Set(pos, false); //borde kunna tas
-        _ladderGrid.Set(pos, true);
-    }
     public void BuildFloor(int floor)
     {
         int floorY = Height - 1 - (floor * 5);
@@ -41,7 +30,9 @@ public class Map
         {
             if (floor % 2 == 0 && floor != 0 && x < 4) continue;
             if (floor % 2 != 0 && x > Width - 5) continue;
-            SetSolidTile(new Position(x, floorY), 'x');
+            Position pos = new Position(x, floorY);
+            _tiles.Set(pos, floorChar);
+            _solidGrid.Set(pos, true);
         }
     }
     public void BuildLadder(int floor)
@@ -50,7 +41,10 @@ public class Map
         int ladderX = (floor % 2 == 0) ? 5 : Width - 6;
         for (int y = floorY; y < floorY + 5; y++)
         {
-            SetLadderTile(new Position(ladderX, y));
+            Position pos = new Position(ladderX, y);
+            
+            _tiles.Set(pos, ladderChar);
+            _ladderGrid.Set(pos, true);
         }
     }
     public void BuildLevel()

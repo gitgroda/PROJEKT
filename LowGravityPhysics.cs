@@ -7,27 +7,26 @@ public class LowGravityPhysics : IClimberPhysics
     {
         Position pos = climber.GetPosition();
         Position target = new Position(pos.X + deltaX, pos.Y);
-        // Låg gravitation tillåter styrningi luften under hopp och fall
+
         if (map.IsWalkable(target))
         {
             climber.MoveTo(target);
         }
     }
-
     public void Climb(Climber climber, int deltaY, Map map)
     {
         Position pos = climber.GetPosition();
         Position target = new Position(pos.X, pos.Y + deltaY);
-        if (map.IsLadder(target) || map.IsLadder(pos))
+        Position belowTarget = new Position(pos.X, pos.Y + deltaY + 1);
+
+        if (map.IsLadder(target) || map.IsLadder(pos) && map.IsWalkable(belowTarget))
         {
             climber.MoveTo(target);
         }
     }
-
     public void Jump(Climber climber, Map map)
     {
         Position pos = climber.GetPosition();
-        // Dubbelt så högt hopp
         if (map.HasGroundBelow(pos) && _jumpTicksLeft == 0)
         {
             _jumpTicksLeft = 6;
@@ -50,7 +49,6 @@ public class LowGravityPhysics : IClimberPhysics
         if (!map.HasGroundBelow(pos))
         {
             _fallTickCounter++;
-            // Faller bara varannat tick (svävar)
             if (_fallTickCounter % 2 == 0)
             {
                 Position below = pos.GetBelow();

@@ -7,7 +7,6 @@ public class FlyingPhysics : IClimberPhysics
     {
         Position pos = climber.GetPosition();
         Position target = new Position(pos.X + deltaX, pos.Y);
-        // Full frihet: kan flyga horisontellt i luften utan markkrav
         if (map.IsWalkable(target))
         {
             climber.MoveTo(target);
@@ -26,7 +25,6 @@ public class FlyingPhysics : IClimberPhysics
 
     public void Jump(Climber climber, Map map)
     {
-        // Vingslag/Jetpack: kan lyfta i luften när som helst (multi-jump)
         _flightTicksLeft = 3;
     }
 
@@ -42,7 +40,6 @@ public class FlyingPhysics : IClimberPhysics
             return;
         }
 
-        // Glidflykt: faller mycket långsamt (endast vart 3:e tick)
         if (!map.HasGroundBelow(pos) && ++_glideCounter % 3 == 0)
         {
             if (map.IsWalkable(pos.GetBelow())) climber.MoveTo(pos.GetBelow());
