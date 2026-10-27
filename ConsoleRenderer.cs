@@ -23,8 +23,11 @@ public class ConsoleRenderer : IRenderer
     {
         ConsoleColor color = ConsoleColor.White;
         Console.SetCursorPosition(position.X, position.Y);
+        Console.Write("         ");
+        Console.SetCursorPosition(position.X, position.Y);
         Console.ForegroundColor = color;
         Console.Write(text);
         Console.ResetColor();
     }
+   
 }
