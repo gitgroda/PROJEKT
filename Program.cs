@@ -14,6 +14,7 @@ List<MenuItem<IClimberPhysics>> playerPhysics = new List<MenuItem<IClimberPhysic
     new MenuItem<IClimberPhysics>("Earth gravity", new StandardPhysics()),
     new MenuItem<IClimberPhysics>("Moon gravity", new LowGravityPhysics()),
     new MenuItem<IClimberPhysics>("Sumo gravity", new HeavyPhysics()),
+    new MenuItem<IClimberPhysics>("Flying", new FlyingPhysics()),
 };
 
 Menu<int> difficultyMenu = new Menu<int>("VÄLJ SVÅRIGHETSGRAD", difficultyItems);
